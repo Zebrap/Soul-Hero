@@ -9,3 +9,9 @@ public class AnimationsTags
     public const string ATTACK1 = "attack1";
     public const string ATTACK2 = "attack2";
 }
+
+public class Tags
+{
+    public const string PLAYER_TAG = "Player";
+    public const string ENEMY_TAG = "Enemy";
+}
