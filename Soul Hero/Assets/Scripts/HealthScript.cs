@@ -14,10 +14,14 @@ public class HealthScript : MonoBehaviour
     private CharacterAnimations characterAnimations;
 
     [SerializeField]
-    private Image health_UI;
+    private GameObject healthUI;
+
+    [SerializeField]
+    private Image healthFill;
     [SerializeField]
     private Text healthText;
 
+    public Gradient gradient;
 
     private void Awake()
     {
@@ -26,6 +30,11 @@ public class HealthScript : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = health + " / " + healthMax;
+        }
+        if (healthFill != null)
+        {
+            healthFill.fillAmount = health / 100f;
+            healthFill.color = gradient.Evaluate(health / 100f);
         }
         if (this.GetComponent<PlayerMovement>())
         {
@@ -44,9 +53,10 @@ public class HealthScript : MonoBehaviour
         {
             healthText.text = health + " / " + healthMax;
         }
-        if (health_UI != null)
+        if (healthFill != null)
         {
-            health_UI.fillAmount = health / 100f;
+            healthFill.fillAmount = health / 100f;
+            healthFill.color = gradient.Evaluate(health / 100f);
         }
         if(health <= 0)
         {
@@ -64,6 +74,7 @@ public class HealthScript : MonoBehaviour
                 GetComponent<EnemyControler>().enabled = false;
                 GetComponent<NavMeshAgent>().enabled = false;
                 GetComponent<BoxCollider>().enabled = false;
+                healthUI.SetActive(false);
             }
         }
     }
