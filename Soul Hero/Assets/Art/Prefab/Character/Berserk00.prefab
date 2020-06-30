@@ -28270,6 +28270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661282e396380f84db8e085fcb352f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleClick: {fileID: 0}
+  particleEnemyColor: {r: 1, g: 0.08962262, b: 0.08962262, a: 1}
+  attack_Distance: 1
+  attack_Distance_OffSet: 1
 --- !u!195 &3047765720651740422
 NavMeshAgent:
   m_ObjectHideFlags: 0

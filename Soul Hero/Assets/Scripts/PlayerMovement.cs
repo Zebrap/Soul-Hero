@@ -117,6 +117,7 @@ public class PlayerMovement : MonoBehaviour
            attack_Distance + attack_Distance_OffSet)
         {
             agent.isStopped = false;
+            playerState = PlayerState.IDLE;
         }
     }
 }
