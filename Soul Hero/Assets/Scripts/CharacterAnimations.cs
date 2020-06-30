@@ -33,6 +33,14 @@ public class CharacterAnimations : MonoBehaviour
       //  animator.SetTrigger(AnimationsTags.ATTACK2);
     }
 
+    public void Attack3()
+    {
+        for (int i = 0; i <= 5; i++)
+        {
+            animator[i].SetTrigger(AnimationsTags.ATTACK3);
+        }
+    }
+
     void FreezeAnimation()
     {
        // animator.speed = 0f;
