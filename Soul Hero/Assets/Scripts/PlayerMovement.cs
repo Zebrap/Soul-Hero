@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float attack_Distance = 1f;
     public float attack_Distance_OffSet = 1f;
-    private Vector3 enemyPosition;
+    private GameObject enemy;
     private PlayerState playerState;
 
     private float wait_Beffore_Attack_Time = 1f;
@@ -64,11 +64,16 @@ public class PlayerMovement : MonoBehaviour
         {
             characterAnimations.Walk(false);
         }
-
-        if (playerState == PlayerState.ATTAK && Vector3.Distance(transform.position, enemyPosition) <= attack_Distance)
+        if(playerState == PlayerState.ATTAK)
         {
-            AttackSingleEnemy();
+            agent.destination = enemy.transform.position;
+            if (Vector3.Distance(transform.position, enemy.transform.position) <= attack_Distance)
+            {
+                AttackSingleEnemy();
+            }
         }
+
+
     }
 
 
@@ -81,8 +86,8 @@ public class PlayerMovement : MonoBehaviour
             if (hit.transform.tag == Tags.ENEMY_TAG)
             {
                 particleColor.color = particleEnemyColor;
-                enemyPosition = hit.transform.gameObject.transform.position;
-                particleClick.transform.position = new Vector3(enemyPosition.x, enemyPosition.y + offSetParticle, enemyPosition.z); // enemy position
+                enemy = hit.transform.gameObject;
+                particleClick.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + offSetParticle, enemy.transform.position.z); // enemy position
                 playerState = PlayerState.ATTAK;
             }
             else
@@ -113,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
             attack_Timer = 0f;
         }
 
-        if (Vector3.Distance(transform.position, enemyPosition) >=
+        if (Vector3.Distance(transform.position, enemy.transform.position) >=
            attack_Distance + attack_Distance_OffSet)
         {
             agent.isStopped = false;
