@@ -7,24 +7,36 @@ using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour
 {
-    public float health = 100f;
+    public int healthMax = 100;
+    public int health = 100;
     public bool isDead = false;
     public bool isPlayer;
     private CharacterAnimations characterAnimations;
 
     [SerializeField]
     private Image health_UI;
+    [SerializeField]
+    private Text healthText;
 
 
     private void Awake()
     {
         characterAnimations = GetComponent<CharacterAnimations>();
+        health = healthMax;
+        if (healthText != null)
+        {
+            healthText.text = health + " / " + healthMax;
+        }
     }
 
-    public void ApplyDamage(float damage)
+    public void ApplyDamage(int damage)
     {
         health -= damage;
-        if(health_UI != null)
+        if (healthText != null)
+        {
+            healthText.text = health + " / " + healthMax;
+        }
+        if (health_UI != null)
         {
             health_UI.fillAmount = health / 100f;
         }

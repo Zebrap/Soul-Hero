@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private float wait_Beffore_Attack_Time = 1f;
     private float attack_Timer;
 
-    public float attack_damage = 10f;
+    public int attack_damage = 10;
 
     void Awake()
     {
