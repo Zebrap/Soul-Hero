@@ -87,12 +87,16 @@ public class PlayerMovement : MonoBehaviour
             {
                 particleColor.color = particleEnemyColor;
                 enemy = hit.transform.gameObject;
-                particleClick.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + offSetParticle, enemy.transform.position.z); // enemy position
+            //    particleClick.transform.position = Vector3.zero;
+                particleClick.transform.SetParent(enemy.transform);
+                particleClick.transform.localPosition = Vector3.zero;
+                //   particleClick.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + offSetParticle, enemy.transform.position.z); // enemy position
                 playerState = PlayerState.ATTAK;
             }
             else
             {
                 particleColor.color = particleMoveColor;
+                particleClick.transform.SetParent(null);
                 particleClick.transform.position = new Vector3(hit.point.x, hit.point.y + offSetParticle, hit.point.z);
                 playerState = PlayerState.IDLE;
                 agent.isStopped = false;
