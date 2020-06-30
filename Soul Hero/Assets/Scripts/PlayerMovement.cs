@@ -9,10 +9,8 @@ public enum PlayerState
     ATTAK
 }
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MoveControl
 {
-    private NavMeshAgent agent;
-    private CharacterAnimations characterAnimations;
     private bool moving;
 
     public ParticleSystem particleClick;
@@ -21,19 +19,21 @@ public class PlayerMovement : MonoBehaviour
     private ParticleSystem.ColorOverLifetimeModule particleColor;
     private float offSetParticle = 0.1f;
 
-    public float attack_Distance = 1f;
-    public float attack_Distance_OffSet = 1f;
-    private GameObject enemy;
     private PlayerState playerState;
+    /* public float attack_Distance = 1f;
+     public float attack_Distance_OffSet = 1f;
+  //   private GameObject target;
 
-    private float wait_Beffore_Attack_Time = 1f;
-    private float attack_Timer;
+     private float wait_Beffore_Attack_Time = 1f;
+     private float attack_Timer;
 
-    public int attack_damage = 10;
+     public int attack_damage = 10;*/
+
+    //   public float roationDegreesPerSecond = 180f;
 
     void Awake()
     {
-        agent = GetComponent<NavMeshAgent>();
+        navAgent = GetComponent<NavMeshAgent>();
         characterAnimations = GetComponent<CharacterAnimations>();
         particleClick.Stop();
         particleMoveColor = particleClick.main.startColor.color;
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
             ClickMove();
         }
 
-        if (agent.velocity.magnitude > 0)
+        if (navAgent.velocity.magnitude > 0)
         {
             moving = true;
         }
@@ -66,16 +66,14 @@ public class PlayerMovement : MonoBehaviour
         {
             characterAnimations.Walk(false);
         }
-        if(playerState == PlayerState.ATTAK && !enemy.GetComponent<HealthScript>().isDead)
+        if(playerState == PlayerState.ATTAK && !target.GetComponent<HealthScript>().isDead)
         {
-            agent.destination = enemy.transform.position;
-            if (Vector3.Distance(transform.position, enemy.transform.position) <= attack_Distance)
+            navAgent.destination = target.transform.position;
+            if (Vector3.Distance(transform.position, target.transform.position) <= attack_Distance)
             {
-                AttackSingleEnemy();
+                AttackSingleTarget();
             }
         }
-
-
     }
 
 
@@ -88,8 +86,8 @@ public class PlayerMovement : MonoBehaviour
             if (hit.transform.tag == Tags.ENEMY_TAG)
             {
                 particleColor.color = particleEnemyColor;
-                enemy = hit.transform.gameObject;
-                particleClick.transform.SetParent(enemy.transform);
+                target = hit.transform.gameObject;
+                particleClick.transform.SetParent(target.transform);
                 particleClick.transform.localPosition = new Vector3(0,offSetParticle,0);
                 //   particleClick.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + offSetParticle, enemy.transform.position.z); // enemy position
                 playerState = PlayerState.ATTAK;
@@ -100,35 +98,17 @@ public class PlayerMovement : MonoBehaviour
                 particleClick.transform.SetParent(null);
                 particleClick.transform.position = new Vector3(hit.point.x, hit.point.y + offSetParticle, hit.point.z);
                 playerState = PlayerState.IDLE;
-                agent.isStopped = false;
+                navAgent.isStopped = false;
             }
             particleClick.transform.rotation = rot;
             particleClick.Play();
 
-            agent.destination = hit.point;
+            navAgent.destination = hit.point;
         }
     }
 
-    private void AttackSingleEnemy()
+    protected override void SetState()
     {
-
-        agent.velocity = Vector3.zero;
-        agent.isStopped = true;
-
-        characterAnimations.Walk(false);
-        attack_Timer += Time.deltaTime;
-        if (attack_Timer > wait_Beffore_Attack_Time)
-        {
-            enemy.GetComponent<HealthScript>().ApplyDamage(attack_damage);
-            characterAnimations.Attack3();
-            attack_Timer = 0f;
-        }
-
-        if (Vector3.Distance(transform.position, enemy.transform.position) >=
-           attack_Distance + attack_Distance_OffSet)
-        {
-            agent.isStopped = false;
-            playerState = PlayerState.IDLE;
-        }
+        playerState = PlayerState.IDLE;
     }
 }

@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move_Speed: 2
   attack_Distance: 1.5
-  chase_Player_After_Attack_Distance: 2
+  chase_Player_After_Attack_Distance: 0.5
   attack_damage: 0
 --- !u!114 &1453031986
 MonoBehaviour:
@@ -1186,10 +1186,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874c7133bdfb7bf4d9422b8c7b6c3d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthMax: 100
   health: 100
   isDead: 0
   isPlayer: 0
   health_UI: {fileID: 0}
+  healthText: {fileID: 0}
 --- !u!1 &1525883254
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,10 +1452,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874c7133bdfb7bf4d9422b8c7b6c3d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthMax: 100
   health: 100
   isDead: 0
   isPlayer: 1
-  health_UI: {fileID: 0}
+  health_UI: {fileID: 1525883256}
+  healthText: {fileID: 925342718}
 --- !u!1 &2085249744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,6 +1578,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attack_Distance
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047765720651740441, guid: 0c83be9d1d7150f46ac18e658667f19e,
+        type: 3}
+      propertyPath: attack_Distance_OffSet
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6682697781849586418, guid: 0c83be9d1d7150f46ac18e658667f19e,
         type: 3}

@@ -9,31 +9,16 @@ public enum EnamyState
     ATTAK
 }
 
-public class EnemyControler : MonoBehaviour
+public class EnemyControler : MoveControl
 {
-    private CharacterAnimations enemy_animation;
-    private NavMeshAgent navAgent;
-
-    private Transform playerTarget;
-
-    public float move_Speed = 3.5f;
-    public float attack_Distance = 1f;
-    public float chase_Player_After_Attack_Distance = 1f;
-
-    private float wait_Beffore_Attack_Time = 1f;
-    private float attack_Timer;
-
-    public int attack_damage = 0;
-
-
     private EnamyState enamy_State;
 
     void Awake()
     {
-        enemy_animation = GetComponent<CharacterAnimations>();
+        characterAnimations = GetComponent<CharacterAnimations>();
         navAgent = GetComponent<NavMeshAgent>();
 
-        playerTarget = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).transform;
+        target = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG);
     }
 
     void Start()
@@ -52,51 +37,30 @@ public class EnemyControler : MonoBehaviour
 
         if (enamy_State == EnamyState.ATTAK)
         {
-            AttackPlayer();
+            AttackSingleTarget();
         }
     }
 
     void ChasePlayer()
     {
-        navAgent.SetDestination(playerTarget.position);
-        navAgent.speed = move_Speed;
+        navAgent.SetDestination(base.target.transform.position);
         if(navAgent.velocity.sqrMagnitude == 0)
         {
-            enemy_animation.Walk(false);
+            characterAnimations.Walk(false);
         }
         else
         {
-            enemy_animation.Walk(true);
+            characterAnimations.Walk(true);
         }
 
-        if(Vector3.Distance(transform.position, playerTarget.position)<= attack_Distance)
+        if(Vector3.Distance(transform.position, base.target.transform.position)<= attack_Distance)
         {
             enamy_State = EnamyState.ATTAK;
         }
     }
 
-    void AttackPlayer()
+    protected override void SetState()
     {
-        navAgent.velocity = Vector3.zero;
-        navAgent.isStopped = true;
-
-        enemy_animation.Walk(false);
-
-        attack_Timer += Time.deltaTime;
-
-        if(attack_Timer > wait_Beffore_Attack_Time)
-        {
-            playerTarget.GetComponent<HealthScript>().ApplyDamage(attack_damage);
-            enemy_animation.Attack3();
-            attack_Timer = 0f;
-        }
-
-        if(Vector3.Distance(transform.position, playerTarget.position) >=
-            attack_Distance + chase_Player_After_Attack_Distance)
-        {
-            navAgent.isStopped = false;
-            enamy_State = EnamyState.CHASE;
-        }
+        enamy_State = EnamyState.CHASE;
     }
-
 }

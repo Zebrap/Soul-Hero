@@ -28231,6 +28231,7 @@ GameObject:
   - component: {fileID: 3047765720651740441}
   - component: {fileID: 3047765720651740422}
   - component: {fileID: 3047765720651740421}
+  - component: {fileID: 2018888078}
   m_Layer: 0
   m_Name: Berserk00
   m_TagString: Player
@@ -28270,10 +28271,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 661282e396380f84db8e085fcb352f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roationDegreesPerSecond: 180
+  attack_Distance: 1.5
+  attack_Distance_OffSet: 0.5
+  attack_damage: 10
   particleClick: {fileID: 0}
   particleEnemyColor: {r: 1, g: 0.08962262, b: 0.08962262, a: 1}
-  attack_Distance: 1
-  attack_Distance_OffSet: 1
 --- !u!195 &3047765720651740422
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -28308,3 +28311,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864ec0f2ef8ed0742be4d3a49f3b3785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2018888078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682697781849586418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874c7133bdfb7bf4d9422b8c7b6c3d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthMax: 100
+  health: 100
+  isDead: 0
+  isPlayer: 1
+  health_UI: {fileID: 0}
+  healthText: {fileID: 0}
