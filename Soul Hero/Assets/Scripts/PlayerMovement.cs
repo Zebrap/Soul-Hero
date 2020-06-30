@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     private float wait_Beffore_Attack_Time = 1f;
     private float attack_Timer;
 
+    public float attack_damage = 10f;
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -64,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             characterAnimations.Walk(false);
         }
-        if(playerState == PlayerState.ATTAK)
+        if(playerState == PlayerState.ATTAK && !enemy.GetComponent<HealthScript>().isDead)
         {
             agent.destination = enemy.transform.position;
             if (Vector3.Distance(transform.position, enemy.transform.position) <= attack_Distance)
@@ -87,9 +89,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 particleColor.color = particleEnemyColor;
                 enemy = hit.transform.gameObject;
-            //    particleClick.transform.position = Vector3.zero;
                 particleClick.transform.SetParent(enemy.transform);
-                particleClick.transform.localPosition = Vector3.zero;
+                particleClick.transform.localPosition = new Vector3(0,offSetParticle,0);
                 //   particleClick.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + offSetParticle, enemy.transform.position.z); // enemy position
                 playerState = PlayerState.ATTAK;
             }
@@ -118,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
         attack_Timer += Time.deltaTime;
         if (attack_Timer > wait_Beffore_Attack_Time)
         {
+            enemy.GetComponent<HealthScript>().ApplyDamage(attack_damage);
             characterAnimations.Attack3();
             attack_Timer = 0f;
         }

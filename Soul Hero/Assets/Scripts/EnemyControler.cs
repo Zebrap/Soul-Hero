@@ -23,6 +23,8 @@ public class EnemyControler : MonoBehaviour
     private float wait_Beffore_Attack_Time = 1f;
     private float attack_Timer;
 
+    public float attack_damage = 0f;
+
 
     private EnamyState enamy_State;
 
@@ -84,6 +86,7 @@ public class EnemyControler : MonoBehaviour
 
         if(attack_Timer > wait_Beffore_Attack_Time)
         {
+            playerTarget.GetComponent<HealthScript>().ApplyDamage(attack_damage);
             enemy_animation.Attack3();
             attack_Timer = 0f;
         }

@@ -41,13 +41,11 @@ public class CharacterAnimations : MonoBehaviour
         }
     }
 
-    void FreezeAnimation()
+    public void Die()
     {
-       // animator.speed = 0f;
-    }
-
-    public void UnFreezeAnimation()
-    {
-     //  animator.speed = 1f;
+        for (int i = 0; i <= 5; i++)
+        {
+            animator[i].SetTrigger(AnimationsTags.DIE);
+        }
     }
 }
