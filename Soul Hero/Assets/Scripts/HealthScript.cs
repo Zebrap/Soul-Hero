@@ -10,7 +10,7 @@ public class HealthScript : MonoBehaviour
     public int healthMax = 100;
     public int health = 100;
     public bool isDead = false;
-    public bool isPlayer;
+    private bool isPlayer;
     private CharacterAnimations characterAnimations;
 
     [SerializeField]
@@ -26,6 +26,14 @@ public class HealthScript : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = health + " / " + healthMax;
+        }
+        if (this.GetComponent<PlayerMovement>())
+        {
+            isPlayer = true;
+        }
+        else
+        {
+            isPlayer = false;
         }
     }
 

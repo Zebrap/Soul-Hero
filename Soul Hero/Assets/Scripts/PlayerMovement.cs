@@ -20,16 +20,6 @@ public class PlayerMovement : MoveControl
     private float offSetParticle = 0.1f;
 
     private PlayerState playerState;
-    /* public float attack_Distance = 1f;
-     public float attack_Distance_OffSet = 1f;
-  //   private GameObject target;
-
-     private float wait_Beffore_Attack_Time = 1f;
-     private float attack_Timer;
-
-     public int attack_damage = 10;*/
-
-    //   public float roationDegreesPerSecond = 180f;
 
     void Awake()
     {
