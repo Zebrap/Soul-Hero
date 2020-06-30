@@ -6,12 +6,12 @@ using UnityEngine.AI;
 public enum PlayerState
 {
     IDLE,
+    WALK,
     ATTAK
 }
 
 public class PlayerMovement : MoveControl
 {
-    private bool moving;
 
     public ParticleSystem particleClick;
     public Color particleEnemyColor;
@@ -20,6 +20,8 @@ public class PlayerMovement : MoveControl
     private float offSetParticle = 0.1f;
 
     private PlayerState playerState;
+
+    public float reachedDestinationTime = 0.8f;
 
     void Awake()
     {
@@ -39,16 +41,7 @@ public class PlayerMovement : MoveControl
             ClickMove();
         }
 
-        if (navAgent.velocity.magnitude > 0)
-        {
-            moving = true;
-        }
-        else
-        {
-            moving = false;
-        }
-
-        if (moving)
+        if (navAgent.velocity.magnitude > 0 && playerState == PlayerState.WALK)
         {
             characterAnimations.Walk(true);
         }
@@ -56,6 +49,7 @@ public class PlayerMovement : MoveControl
         {
             characterAnimations.Walk(false);
         }
+
         if(playerState == PlayerState.ATTAK && !target.GetComponent<HealthScript>().isDead)
         {
             navAgent.destination = target.transform.position;
@@ -64,8 +58,14 @@ public class PlayerMovement : MoveControl
                 AttackSingleTarget();
             }
         }
-    }
 
+        if (playerState == PlayerState.WALK && Vector3.SqrMagnitude(navAgent.destination - transform.position) < 1.0f)
+        {
+            StartCoroutine(ReachedDestination());
+        }
+        // TODO if desitnation
+       // navAgent.isStopped = true;
+    }
 
     private void ClickMove()
     {
@@ -87,18 +87,24 @@ public class PlayerMovement : MoveControl
                 particleColor.color = particleMoveColor;
                 particleClick.transform.SetParent(null);
                 particleClick.transform.position = new Vector3(hit.point.x, hit.point.y + offSetParticle, hit.point.z);
-                playerState = PlayerState.IDLE;
+                playerState = PlayerState.WALK;
                 navAgent.isStopped = false;
             }
             particleClick.transform.rotation = rot;
             particleClick.Play();
-
             navAgent.destination = hit.point;
         }
     }
 
     protected override void SetState()
     {
+        playerState = PlayerState.IDLE;
+    }
+
+    IEnumerator ReachedDestination()
+    {
+        yield return new WaitForSeconds(reachedDestinationTime);
+        navAgent.isStopped = true;
         playerState = PlayerState.IDLE;
     }
 }

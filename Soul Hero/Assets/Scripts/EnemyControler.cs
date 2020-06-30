@@ -13,10 +13,13 @@ public class EnemyControler : MoveControl
 {
     private EnamyState enamy_State;
 
+    private Rigidbody rigidbody;
+
     void Awake()
     {
         characterAnimations = GetComponent<CharacterAnimations>();
         navAgent = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
 
         target = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG);
     }
@@ -30,20 +33,32 @@ public class EnemyControler : MoveControl
 
     void Update()
     {
-        if(enamy_State == EnamyState.CHASE)
+        if (target.GetComponent<HealthScript>().isDead)
+        {
+            characterAnimations.Walk(false);
+            return;
+        }
+
+        if(enamy_State == EnamyState.CHASE )
         {
             ChasePlayer();
         }
 
         if (enamy_State == EnamyState.ATTAK)
         {
+            FreezOnAttack();
             AttackSingleTarget();
         }
     }
 
+    private void FreezOnAttack()
+    {
+        rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+    }
+
     void ChasePlayer()
     {
-        navAgent.SetDestination(base.target.transform.position);
+        navAgent.SetDestination(target.transform.position);
         if(navAgent.velocity.sqrMagnitude == 0)
         {
             characterAnimations.Walk(false);
