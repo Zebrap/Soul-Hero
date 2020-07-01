@@ -17,9 +17,9 @@ public class AbilityControler : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && player.canMove)
         {
-            ability.UseAbility(transform.position);
+            ability.UseAbility(transform.position, transform.forward);
             characterAnimations.BeamSKill();
         }
     }

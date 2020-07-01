@@ -16,6 +16,11 @@ public class Abilitys : MonoBehaviour
     public float timeEndCollider = 0.5f;
     public float timeDeactive = 1f;
 
+    private float timer;
+    private Vector3 pos;
+
+    public float fowardValue = 1f;
+
     void Awake()
     {
         gameObject.SetActive(false);
@@ -24,11 +29,23 @@ public class Abilitys : MonoBehaviour
         collidersList = new List<Collider>();
     }
 
-    public void UseAbility(Vector3 position)
+    private void Update()
+    {
+        if (gameObject.activeSelf)
+        {
+            timer += Time.deltaTime / timeStartCollider;
+            transform.position = Vector3.Lerp(pos, offSetPosition + pos, timer);
+        }
+    }
+
+    public void UseAbility(Vector3 position, Vector3 forward)
     {
         if (!gameObject.activeSelf)
         {
-            transform.position = offSetPosition + position;
+            timer = 0;
+            pos = position + forward* fowardValue;
+            transform.position = pos;
+            //  transform.position = offSetPosition + position;
             gameObject.SetActive(true);
             particleEffect.Play();
             StartCoroutine(CollectColider());

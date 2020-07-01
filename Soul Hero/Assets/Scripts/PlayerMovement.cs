@@ -24,6 +24,7 @@ public class PlayerMovement : MoveControl
     public float reachedDestinationTime = 0.8f;
     public LayerMask IgnoreMe;
 
+    [HideInInspector]
     public bool canMove;
 
     void Awake()
@@ -41,7 +42,7 @@ public class PlayerMovement : MoveControl
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && canMove)
+        if (Input.GetMouseButtonDown(0))
         {
             ClickMove();
         }
@@ -63,7 +64,7 @@ public class PlayerMovement : MoveControl
             characterAnimations.Walk(false);
         }
 
-        if(playerState == PlayerState.ATTAK && !target.GetComponent<HealthScript>().isDead)
+        if(playerState == PlayerState.ATTAK && !target.GetComponent<HealthScript>().isDead && canMove)
         {
             if (Vector3.Distance(transform.position, target.transform.position) <= attack_Distance)
             {
@@ -79,7 +80,10 @@ public class PlayerMovement : MoveControl
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, ~IgnoreMe))
         {
-            navAgent.isStopped = false;
+            if (canMove)
+            {
+                navAgent.isStopped = false;
+            }
             Quaternion rot = Quaternion.Euler(90, 0, 0);
             if (hit.transform.tag == Tags.ENEMY_TAG)
             {
