@@ -48,4 +48,12 @@ public class CharacterAnimations : MonoBehaviour
             animator[i].SetTrigger(AnimationsTags.DIE);
         }
     }
+
+    public void BeamSKill()
+    {
+        for (int i = 0; i <= 5; i++)
+        {
+            animator[i].SetTrigger(AnimationsTags.BEAMSKILL);
+        }
+    }
 }

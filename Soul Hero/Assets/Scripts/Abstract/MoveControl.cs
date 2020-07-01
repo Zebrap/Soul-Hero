@@ -68,5 +68,12 @@ abstract public class MoveControl : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(newDirection);
     }
 
-    
+    public void NavMeshAgent_is_Stop(bool stop)
+    {
+        if(stop == true)
+        {
+            navAgent.velocity = Vector3.zero;
+        }
+        navAgent.isStopped = stop;
+    }
 }

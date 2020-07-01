@@ -24,6 +24,8 @@ public class PlayerMovement : MoveControl
     public float reachedDestinationTime = 0.8f;
     public LayerMask IgnoreMe;
 
+    public bool canMove;
+
     void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
@@ -34,11 +36,12 @@ public class PlayerMovement : MoveControl
         playerState = PlayerState.IDLE;
         attack_Timer = wait_Beffore_Attack_Time;
         navAgent.avoidancePriority = 0;
+        canMove = true;
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && canMove)
         {
             ClickMove();
         }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8946780713641015298}
   - component: {fileID: 7199164547764101096}
   - component: {fileID: 6611970328637026281}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CircleParticleSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

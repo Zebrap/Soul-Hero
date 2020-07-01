@@ -10,6 +10,7 @@ public class AnimationsTags
     public const string ATTACK2 = "Attack2";
     public const string ATTACK3 = "Attack3";
     public const string DIE = "Die";
+    public const string BEAMSKILL = "BeamSkill";
 }
 
 public class Tags

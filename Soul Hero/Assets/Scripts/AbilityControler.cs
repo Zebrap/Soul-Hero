@@ -5,11 +5,14 @@ using UnityEngine;
 public class AbilityControler : MonoBehaviour
 {
     // TODO prefb spell? List spells?
-    public Abilitys ability; 
+    public Abilitys ability;
+    protected CharacterAnimations characterAnimations;
+    private PlayerMovement player;
 
-    void Start()
+    void Awake()
     {
-        
+        characterAnimations = GetComponent<CharacterAnimations>();
+        player = GetComponent<PlayerMovement>();
     }
 
     void Update()
@@ -17,6 +20,7 @@ public class AbilityControler : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             ability.UseAbility(transform.position);
+            characterAnimations.BeamSKill();
         }
     }
 }
