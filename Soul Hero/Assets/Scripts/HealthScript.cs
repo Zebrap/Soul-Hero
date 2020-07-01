@@ -12,16 +12,18 @@ public class HealthScript : MonoBehaviour
     public bool isDead = false;
     private bool isPlayer;
     private CharacterAnimations characterAnimations;
-
+    #pragma warning disable 0649
     [SerializeField]
     private GameObject healthUI;
-
+    #pragma warning disable 0649
     [SerializeField]
     private Image healthFill;
   //  [SerializeField]
     private Text healthText;
 
     public Gradient gradient;
+
+    private float waitTimeToDisable = 3f;
 
     private void Awake()
     {
@@ -75,8 +77,15 @@ public class HealthScript : MonoBehaviour
                 GetComponent<BoxCollider>().enabled = false;
                 GetComponent<NavMeshObstacle>().enabled = false;
                 healthUI.SetActive(false);
+                StartCoroutine(DisableEnemy());
             }
         }
+    }
+
+    IEnumerator DisableEnemy()
+    {
+        yield return new WaitForSeconds(waitTimeToDisable);
+        gameObject.SetActive(false);
     }
 
 }
