@@ -18,3 +18,8 @@ public class Tags
     public const string ENEMY_TAG = "Enemy";
     public const string MAINCAMERA_TAG = "MainCamera";
 }
+
+public class AxisTags
+{
+    public const string AXIS_SCROLLWHEEL = "Mouse ScrollWheel";
+}

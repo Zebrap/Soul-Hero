@@ -22,6 +22,7 @@ public class PlayerMovement : MoveControl
     private PlayerState playerState;
 
     public float reachedDestinationTime = 0.8f;
+    public LayerMask IgnoreMe;
 
     void Awake()
     {
@@ -73,7 +74,7 @@ public class PlayerMovement : MoveControl
     private void ClickMove()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, ~IgnoreMe))
         {
             navAgent.isStopped = false;
             Quaternion rot = Quaternion.Euler(90, 0, 0);
