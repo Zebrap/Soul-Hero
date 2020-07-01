@@ -32,6 +32,7 @@ public class PlayerMovement : MoveControl
         particleColor = particleClick.colorOverLifetime;
         playerState = PlayerState.IDLE;
         attack_Timer = wait_Beffore_Attack_Time;
+        navAgent.avoidancePriority = 0;
     }
 
     private void Update()

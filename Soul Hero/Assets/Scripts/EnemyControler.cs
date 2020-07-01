@@ -12,16 +12,15 @@ public enum EnamyState
 public class EnemyControler : MoveControl
 {
     private EnamyState enamy_State;
-
-    private Rigidbody rigidbody;
+    private NavMeshObstacle obstacle;
 
     void Awake()
     {
         characterAnimations = GetComponent<CharacterAnimations>();
         navAgent = GetComponent<NavMeshAgent>();
-        rigidbody = GetComponent<Rigidbody>();
 
         target = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG);
+        obstacle = GetComponent<NavMeshObstacle>();
     }
 
     void Start()
@@ -53,13 +52,18 @@ public class EnemyControler : MoveControl
 
     private void FreezOnAttack()
     {
-        rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+        navAgent.enabled = false;
     }
+
 
     void ChasePlayer()
     {
+        navAgent.avoidancePriority = (int)Vector3.Distance(transform.position, target.transform.position);
+        
         navAgent.SetDestination(target.transform.position);
-        if(navAgent.velocity.sqrMagnitude == 0)
+        for (int i = 0; i < navAgent.path.corners.Length - 1; i++)
+            Debug.DrawLine(navAgent.path.corners[i], navAgent.path.corners[i + 1], Color.red);
+        if (navAgent.velocity.sqrMagnitude == 0)
         {
             characterAnimations.Walk(false);
         }
@@ -68,14 +72,20 @@ public class EnemyControler : MoveControl
             characterAnimations.Walk(true);
         }
 
-        if(Vector3.Distance(transform.position, base.target.transform.position)<= attack_Distance)
+        if(Vector3.Distance(transform.position, target.transform.position)<= attack_Distance)
         {
             enamy_State = EnamyState.ATTAK;
+            obstacle.enabled = true;
+        }
+        else
+        {
+            obstacle.enabled = false;
         }
     }
 
     protected override void SetState()
     {
         enamy_State = EnamyState.CHASE;
+        navAgent.enabled = true;
     }
 }

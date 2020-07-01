@@ -74,6 +74,7 @@ public class HealthScript : MonoBehaviour
                 GetComponent<EnemyControler>().enabled = false;
                 GetComponent<NavMeshAgent>().enabled = false;
                 GetComponent<BoxCollider>().enabled = false;
+                GetComponent<NavMeshObstacle>().enabled = false;
                 healthUI.SetActive(false);
             }
         }

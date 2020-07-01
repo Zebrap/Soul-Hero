@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 7826756427951605980}
   - component: {fileID: 7826756427794886448}
   - component: {fileID: 7826756427794886449}
+  - component: {fileID: 9189380287599946553}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -327,7 +328,7 @@ Transform:
   m_GameObject: {fileID: 3468774164007304096}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 5.94}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 5049198872345793105}
   - {fileID: 5049198871897666272}
@@ -447,8 +448,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roationDegreesPerSecond: 180
   attack_Distance: 1.5
-  attack_Distance_OffSet: 1
+  attack_Distance_OffSet: 0.5
   attack_damage: 0
+--- !u!208 &9189380287599946553
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3468774164007304096}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.05, y: 0.76, z: 0.05}
+  m_MoveThreshold: 0.2
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.84, z: 0}
+  m_TimeToStationary: 0.2
 --- !u!1 &5049198870696336080
 GameObject:
   m_ObjectHideFlags: 0

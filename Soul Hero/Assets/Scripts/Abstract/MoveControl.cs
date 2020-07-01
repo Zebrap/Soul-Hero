@@ -30,15 +30,21 @@ abstract public class MoveControl : MonoBehaviour
         if (Vector3.Distance(transform.position, target.transform.position) >=
    attack_Distance + attack_Distance_OffSet)
         {
-            navAgent.isStopped = false;
             SetState();
+            if (navAgent.enabled)
+            {
+                navAgent.isStopped = false;
+            }
        //     playerState = PlayerState.IDLE;
         }
         else
         {
             RotateToTarget();
-            navAgent.velocity = Vector3.zero;
-            navAgent.isStopped = true;
+            if (navAgent.enabled)
+            {
+                navAgent.velocity = Vector3.zero;
+                navAgent.isStopped = true;
+            }
             characterAnimations.Walk(false);
         }
 
