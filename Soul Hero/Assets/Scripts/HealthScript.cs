@@ -18,7 +18,7 @@ public class HealthScript : MonoBehaviour
 
     [SerializeField]
     private Image healthFill;
-    [SerializeField]
+  //  [SerializeField]
     private Text healthText;
 
     public Gradient gradient;
@@ -26,7 +26,6 @@ public class HealthScript : MonoBehaviour
     private void Awake()
     {
         characterAnimations = GetComponent<CharacterAnimations>();
-        health = healthMax;
         if (healthText != null)
         {
             healthText.text = health + " / " + healthMax;

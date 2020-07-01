@@ -45,16 +45,9 @@ public class EnemyControler : MoveControl
 
         if (enamy_State == EnamyState.ATTAK)
         {
-            FreezOnAttack();
             AttackSingleTarget();
         }
     }
-
-    private void FreezOnAttack()
-    {
-        navAgent.enabled = false;
-    }
-
 
     void ChasePlayer()
     {
@@ -75,6 +68,7 @@ public class EnemyControler : MoveControl
         if(Vector3.Distance(transform.position, target.transform.position)<= attack_Distance)
         {
             enamy_State = EnamyState.ATTAK;
+            FreezOnAttack();
             obstacle.enabled = true;
         }
         else
@@ -86,6 +80,12 @@ public class EnemyControler : MoveControl
     protected override void SetState()
     {
         enamy_State = EnamyState.CHASE;
+        obstacle.enabled = false;
         navAgent.enabled = true;
+    }
+
+    private void FreezOnAttack()
+    {
+        navAgent.enabled = false;
     }
 }

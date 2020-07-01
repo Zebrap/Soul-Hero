@@ -41,8 +41,16 @@ public class PlayerMovement : MoveControl
         {
             ClickMove();
         }
+        else if (playerState == PlayerState.WALK && navAgent.remainingDistance <= navAgent.stoppingDistance)
+        {
+            if (!navAgent.hasPath || navAgent.velocity.sqrMagnitude == 0f)
+            {
+                navAgent.isStopped = true;
+                playerState = PlayerState.IDLE;
+            }
+        }
 
-        if (navAgent.velocity.magnitude > 0 && playerState == PlayerState.WALK)
+        if (navAgent.velocity.magnitude > 0)
         {
             characterAnimations.Walk(true);
         }
@@ -53,19 +61,13 @@ public class PlayerMovement : MoveControl
 
         if(playerState == PlayerState.ATTAK && !target.GetComponent<HealthScript>().isDead)
         {
-            navAgent.destination = target.transform.position;
             if (Vector3.Distance(transform.position, target.transform.position) <= attack_Distance)
             {
                 AttackSingleTarget();
+                return;
             }
+            navAgent.destination = target.transform.position;
         }
-
-        if (playerState == PlayerState.WALK && Vector3.SqrMagnitude(navAgent.destination - transform.position) < 1.0f)
-        {
-            StartCoroutine(ReachedDestination());
-        }
-        // TODO if desitnation
-       // navAgent.isStopped = true;
     }
 
     private void ClickMove()
@@ -73,6 +75,7 @@ public class PlayerMovement : MoveControl
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
         {
+            navAgent.isStopped = false;
             Quaternion rot = Quaternion.Euler(90, 0, 0);
             if (hit.transform.tag == Tags.ENEMY_TAG)
             {
@@ -81,6 +84,7 @@ public class PlayerMovement : MoveControl
                 particleClick.transform.SetParent(target.transform);
                 particleClick.transform.localPosition = new Vector3(0,offSetParticle,0);
                 //   particleClick.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + offSetParticle, enemy.transform.position.z); // enemy position
+                navAgent.destination = hit.point;
                 playerState = PlayerState.ATTAK;
             }
             else
@@ -88,12 +92,11 @@ public class PlayerMovement : MoveControl
                 particleColor.color = particleMoveColor;
                 particleClick.transform.SetParent(null);
                 particleClick.transform.position = new Vector3(hit.point.x, hit.point.y + offSetParticle, hit.point.z);
+                navAgent.destination = hit.point;
                 playerState = PlayerState.WALK;
-                navAgent.isStopped = false;
             }
             particleClick.transform.rotation = rot;
             particleClick.Play();
-            navAgent.destination = hit.point;
         }
     }
 
@@ -102,10 +105,5 @@ public class PlayerMovement : MoveControl
         playerState = PlayerState.IDLE;
     }
 
-    IEnumerator ReachedDestination()
-    {
-        yield return new WaitForSeconds(reachedDestinationTime);
-        navAgent.isStopped = true;
-        playerState = PlayerState.IDLE;
-    }
+
 }

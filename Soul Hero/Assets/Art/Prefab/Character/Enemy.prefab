@@ -328,7 +328,7 @@ Transform:
   m_GameObject: {fileID: 3468774164007304096}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 5.94}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 5049198872345793105}
   - {fileID: 5049198871897666272}
@@ -448,7 +448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roationDegreesPerSecond: 180
   attack_Distance: 1.5
-  attack_Distance_OffSet: 0.5
+  attack_Distance_OffSet: 0
   attack_damage: 0
 --- !u!208 &9189380287599946553
 NavMeshObstacle:
@@ -457,7 +457,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3468774164007304096}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.05, y: 0.76, z: 0.05}
