@@ -9,8 +9,9 @@ public class AbilityControler : MonoBehaviour
     public Ability[] abilities;
     protected CharacterAnimations characterAnimations;
     private PlayerMovement player;
+    private ManaScript manaScript;
 
-    #pragma warning disable 0649
+#pragma warning disable 0649
     [SerializeField]
     private GameObject[] skillUI;
 
@@ -28,6 +29,7 @@ public class AbilityControler : MonoBehaviour
         timeCooldown = new float[abilities.Length];
         SkillBackGround = new Image[skillUI.Length];
         SkillFill = new Image[skillUI.Length];
+        manaScript = GetComponent<ManaScript>();
 
         cdNumber = 0;
         foreach (GameObject skills in skillUI)
@@ -90,12 +92,15 @@ public class AbilityControler : MonoBehaviour
         {
             if (!abilities[id].gameObject.activeSelf)
             {
-                timerSkill[id] = 0;
-                player.NavMeshAgent_is_Stop(true);
-                abilities[id].UseAbility(transform.position, transform.forward);
-                characterAnimations.UseAbility(abilities[id].abilityEnum);
-                float timeCast = abilities[id].TimeCast();
-                StartCoroutine(CastTime(timeCast));
+                if (manaScript.CostMana(abilities[id].manaCost))
+                {
+                    timerSkill[id] = 0;
+                    player.NavMeshAgent_is_Stop(true);
+                    abilities[id].UseAbility(transform.position, transform.forward);
+                    characterAnimations.UseAbility(abilities[id].abilityEnum);
+                    float timeCast = abilities[id].TimeCast();
+                    StartCoroutine(CastTime(timeCast));
+                }
             }
         }
         else

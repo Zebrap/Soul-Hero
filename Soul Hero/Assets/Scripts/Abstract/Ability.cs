@@ -19,6 +19,8 @@ abstract public class Ability : MonoBehaviour
     public float fowardValue = 1f;
     public AbilityEnum abilityEnum;
 
+    public int manaCost = 20;
+
     void Awake()
     {
         gameObject.SetActive(false);

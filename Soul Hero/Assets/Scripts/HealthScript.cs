@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class HealthScript : MonoBehaviour
 {
     public int healthMax = 100;
-    public int health = 100;
+    public int health;
     public bool isDead = false;
     private bool isPlayer;
     private CharacterAnimations characterAnimations;
@@ -28,6 +28,7 @@ public class HealthScript : MonoBehaviour
 
     private void Awake()
     {
+        health = healthMax;
         characterAnimations = GetComponent<CharacterAnimations>();
         if (healthText != null)
         {
@@ -68,7 +69,6 @@ public class HealthScript : MonoBehaviour
             if (isPlayer)
             {
                 GetComponent<PlayerMovement>().enabled = false;
-
                 GameObject.FindGameObjectWithTag(Tags.ENEMY_TAG).GetComponent<EnemyControler>().enabled = false;
             }
             else
