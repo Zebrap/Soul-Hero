@@ -25,6 +25,9 @@ abstract public class MoveControl : MonoBehaviour
 
     public int attack_damage = 10;
 
+    [HideInInspector]
+    public bool canMove;
+
     protected void AttackSingleTarget()
     {
         if (Vector3.Distance(transform.position, target.transform.position) >=
@@ -54,11 +57,8 @@ abstract public class MoveControl : MonoBehaviour
             attack_Timer = 0f;
         }
     }
-    
-    protected virtual void SetState()
-    {
 
-    }
+    protected abstract void SetState();
 
     protected void RotateToTarget()
     {
@@ -73,6 +73,11 @@ abstract public class MoveControl : MonoBehaviour
         if(stop == true)
         {
             navAgent.velocity = Vector3.zero;
+            canMove = false;
+        }
+        else
+        {
+            canMove = true;
         }
         navAgent.isStopped = stop;
     }

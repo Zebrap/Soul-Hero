@@ -24,9 +24,6 @@ public class PlayerMovement : MoveControl
     public float reachedDestinationTime = 0.8f;
     public LayerMask IgnoreMe;
 
-    [HideInInspector]
-    public bool canMove;
-
     void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
@@ -54,6 +51,7 @@ public class PlayerMovement : MoveControl
                 playerState = PlayerState.IDLE;
             }
         }
+
 
         if (navAgent.velocity.magnitude > 0)
         {

@@ -391,7 +391,6 @@ MonoBehaviour:
   isDead: 0
   healthUI: {fileID: 1458639813}
   healthFill: {fileID: 1430431839}
-  healthText: {fileID: 0}
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
@@ -449,7 +448,7 @@ MonoBehaviour:
   roationDegreesPerSecond: 180
   attack_Distance: 1.5
   attack_Distance_OffSet: 0
-  attack_damage: 0
+  attack_damage: 1
 --- !u!208 &9189380287599946553
 NavMeshObstacle:
   m_ObjectHideFlags: 0

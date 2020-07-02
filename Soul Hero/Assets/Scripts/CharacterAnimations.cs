@@ -49,11 +49,11 @@ public class CharacterAnimations : MonoBehaviour
         }
     }
 
-    public void BeamSKill()
+    public void UseAbility(AbilityEnum tag)
     {
         for (int i = 0; i <= 5; i++)
         {
-            animator[i].SetTrigger(AnimationsTags.BEAMSKILL);
+            animator[i].SetTrigger(tag.ToString());
         }
     }
 }

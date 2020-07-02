@@ -8,13 +8,13 @@ public class AnimationEvents : MonoBehaviour
 
     public void FreezPlayerMove()
     {
-        player.NavMeshAgent_is_Stop(true);
-        player.canMove = false;
+    //    player.NavMeshAgent_is_Stop(true);
+   //     player.canMove = false;
     }
 
     public void UnFreezPlayerMove()
     {
-        player.NavMeshAgent_is_Stop(false);
-        player.canMove = true;
+   //     player.NavMeshAgent_is_Stop(false);
+   //     player.canMove = true;
     }
 }

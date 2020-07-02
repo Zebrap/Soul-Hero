@@ -10,6 +10,10 @@ public class AnimationsTags
     public const string ATTACK2 = "Attack2";
     public const string ATTACK3 = "Attack3";
     public const string DIE = "Die";
+}
+
+public class AbilityAnimationsTags
+{
     public const string BEAMSKILL = "BeamSkill";
 }
 
@@ -23,4 +27,10 @@ public class Tags
 public class AxisTags
 {
     public const string AXIS_SCROLLWHEEL = "Mouse ScrollWheel";
+}
+
+public enum AbilityEnum
+{
+    BeamSkill,
+    NoSkill
 }

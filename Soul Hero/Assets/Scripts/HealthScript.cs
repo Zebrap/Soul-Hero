@@ -18,7 +18,8 @@ public class HealthScript : MonoBehaviour
     #pragma warning disable 0649
     [SerializeField]
     private Image healthFill;
-  //  [SerializeField]
+    #pragma warning disable 0649
+    [SerializeField]
     private Text healthText;
 
     public Gradient gradient;
