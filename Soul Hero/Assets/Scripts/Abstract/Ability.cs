@@ -57,6 +57,17 @@ abstract public class Ability : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnTriggerStay(Collider target)
+    {
+        if (dealDamage && target.tag == Tags.ENEMY_TAG)
+        {
+            if (!collidersList.Contains(target))
+            {
+                collidersList.Add(target);
+            }
+        }
+    }
+
     private void DealDamage()
     {
         dealDamage = false;
@@ -64,11 +75,13 @@ abstract public class Ability : MonoBehaviour
         {
             if (target.gameObject.activeSelf)
             {
-                target.GetComponent<HealthScript>().ApplyDamage(spellDamage);
+                ActionOnTarget(target);
             }
         }
         collidersList.Clear();
     }
+
+    protected virtual void ActionOnTarget(Collider target){}
 
     public float TimeCast()
     {

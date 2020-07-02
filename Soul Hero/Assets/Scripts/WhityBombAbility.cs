@@ -16,4 +16,9 @@ public class WhityBombAbility : Ability
         pos = characterPosition + forward * fowardValue;
         transform.position = pos;
     }
+
+    protected override void ActionOnTarget(Collider target)
+    {
+        target.GetComponent<HealthScript>().ApplyDamage(spellDamage);
+    }
 }

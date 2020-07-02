@@ -1,18 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class AbilityControler : MonoBehaviour
 {
-    public List<Ability> abilities;
+    public Ability[] abilities;
     protected CharacterAnimations characterAnimations;
     private PlayerMovement player;
 
+    #pragma warning disable 0649
+    [SerializeField]
+    private GameObject[] skillUI;
+
+    private Image[] SkillBackGround;
+    private Image[] SkillFill;
+
+    private float[] timerSkill;
+    private float[] timeCooldown;
+
+    private int cdNumber;
+
     void Awake()
     {
+        timerSkill = new float[abilities.Length];
+        timeCooldown = new float[abilities.Length];
+        SkillBackGround = new Image[skillUI.Length];
+        SkillFill = new Image[skillUI.Length];
+
+        cdNumber = 0;
+        foreach (GameObject skills in skillUI)
+        {
+            SkillBackGround[cdNumber] = skills.transform.GetChild(0).GetComponent<Image>();  // Background
+            SkillFill[cdNumber] = skills.transform.GetChild(1).GetComponent<Image>();        // FillAmount
+            cdNumber++;
+        }
+
+        cdNumber = 0;
         characterAnimations = GetComponent<CharacterAnimations>();
         player = GetComponent<PlayerMovement>();
+        foreach (Ability ability in abilities)
+        {
+            timerSkill[cdNumber] = 0;
+            timeCooldown[cdNumber] = ability.ActiveTime();
+            SkillBackGround[cdNumber].GetComponent<Image>().sprite = ability.GetComponent<Image>().sprite;
+            cdNumber++;
+        }
+
     }
 
     void Update()
@@ -36,23 +71,29 @@ public class AbilityControler : MonoBehaviour
                 ActiveAbility(3);
             }
         }
-    }
 
-    IEnumerator CastTime(float timeCast)
-    {
-        yield return new WaitForSeconds(timeCast);
-        player.NavMeshAgent_is_Stop(false);
+        cdNumber = 0;
+        foreach(Ability ability in abilities)
+        {
+            if (ability.gameObject.activeSelf)
+            {
+                timerSkill[cdNumber] += Time.deltaTime;
+                SkillFill[cdNumber].fillAmount = (timeCooldown[cdNumber] - timerSkill[cdNumber]) / timeCooldown[cdNumber];
+            }
+            cdNumber++;
+        }
     }
 
     private void ActiveAbility(int id)
     {
-        if (abilities.Count > id)
+        if (abilities.Length > id)
         {
             if (!abilities[id].gameObject.activeSelf)
             {
+                timerSkill[id] = 0;
                 player.NavMeshAgent_is_Stop(true);
-                abilities[0].UseAbility(transform.position, transform.forward);
-                characterAnimations.UseAbility(abilities[0].abilityEnum);
+                abilities[id].UseAbility(transform.position, transform.forward);
+                characterAnimations.UseAbility(abilities[id].abilityEnum);
                 float timeCast = abilities[id].TimeCast();
                 StartCoroutine(CastTime(timeCast));
             }
@@ -62,4 +103,11 @@ public class AbilityControler : MonoBehaviour
             print("not learn yet "+id);
         }
     }
+
+    IEnumerator CastTime(float timeCast)
+    {
+        yield return new WaitForSeconds(timeCast);
+        player.NavMeshAgent_is_Stop(false);
+    }
+
 }
