@@ -26,6 +26,10 @@ public class HealthScript : MonoBehaviour
 
     private float waitTimeToDisable = 3f;
 
+    public int healthRegen = 0;
+    private float time = 0.0f;
+    public float period = 1f;
+
     private void Awake()
     {
         health = healthMax;
@@ -89,4 +93,27 @@ public class HealthScript : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (time < period)
+        {
+            time += Time.deltaTime;
+        }
+        else
+        { 
+            HealthRegeneration(healthRegen);
+            time = 0;
+        }
+    }
+
+    public void HealthRegeneration(int regeneration)
+    {
+        health = Mathf.Clamp(health + healthRegen, 0, healthMax);
+        healthFill.fillAmount = health / 100f;
+        healthFill.color = gradient.Evaluate(health / 100f);
+        if (healthText != null)
+        {
+            healthText.text = health + " / " + healthMax;
+        }
+    }
 }

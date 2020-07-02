@@ -55,12 +55,17 @@ public class ManaScript : MonoBehaviour
         }
         else
         {
-            mana = Mathf.Clamp(mana + manaRegen, 0, manaMax);
-            manaFill.fillAmount = mana / 100f;
-            manaText.text = mana + " / " + manaMax;
+            ManaRegeneration(manaRegen);
             time = 0;
         }
     }
 
-
+    public void ManaRegeneration(int regeneration)
+    {
+        mana = Mathf.Clamp(mana + regeneration, 0, manaMax);
+        manaFill.fillAmount = mana / 100f;
+        manaText.text = mana + " / " + manaMax;
+    }
 }
+
+
