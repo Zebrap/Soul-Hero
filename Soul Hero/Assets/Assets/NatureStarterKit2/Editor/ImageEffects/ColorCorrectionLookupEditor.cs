@@ -15,7 +15,7 @@ namespace UnityStandardAssets.ImageEffects
 
         private Texture2D tempClutTex2D;
 
-
+        #pragma warning disable 0618
         public override void OnInspectorGUI () {
             serObj.Update ();
 

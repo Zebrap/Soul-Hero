@@ -19,6 +19,7 @@ namespace UnityStandardAssets.ImageEffects
 
         private RenderTexture accumTexture;
 
+        [Obsolete]
         override protected void Start()
         {
             if (!SystemInfo.supportsRenderTextures)

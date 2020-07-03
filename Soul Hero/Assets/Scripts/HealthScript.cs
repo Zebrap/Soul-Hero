@@ -30,6 +30,9 @@ public class HealthScript : MonoBehaviour
     private float time = 0.0f;
     public float period = 1f;
 
+    public int experience = 3;
+    private Experience playerExperience;
+
     private void Awake()
     {
         health = healthMax;
@@ -43,6 +46,10 @@ public class HealthScript : MonoBehaviour
             healthFill.fillAmount = health / 100f;
             healthFill.color = gradient.Evaluate(health / 100f);
         }
+    }
+
+    public void Start()
+    {
         if (this.GetComponent<PlayerMovement>())
         {
             isPlayer = true;
@@ -50,6 +57,7 @@ public class HealthScript : MonoBehaviour
         else
         {
             isPlayer = false;
+            playerExperience = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<Experience>();
         }
     }
 
@@ -77,6 +85,7 @@ public class HealthScript : MonoBehaviour
             }
             else
             {
+                GiveExp();
                 GetComponent<EnemyControler>().enabled = false;
                 GetComponent<NavMeshAgent>().enabled = false;
                 GetComponent<BoxCollider>().enabled = false;
@@ -115,5 +124,10 @@ public class HealthScript : MonoBehaviour
         {
             healthText.text = health + " / " + healthMax;
         }
+    }
+
+    private void GiveExp()
+    {
+        playerExperience.GetExp(experience);
     }
 }
