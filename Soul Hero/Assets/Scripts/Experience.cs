@@ -20,8 +20,11 @@ public class Experience : MonoBehaviour
     [SerializeField]
     public Text levelText;
 
+    public ParticleSystem levelUpParticle;
+
     void Awake()
     {
+        levelUpParticle.Stop();
         expFill.fillAmount = currentExp / expNeedForTheLevel[level];
         expText.text = currentExp + " / " + expNeedForTheLevel[level] + " XP";
         levelText.text = (level + 1).ToString();
@@ -36,6 +39,7 @@ public class Experience : MonoBehaviour
             level++;
             skillPoitns++;
             levelText.text = (level + 1).ToString();
+            levelUpParticle.Play();
         }
         expFill.fillAmount = ((float)currentExp / (float)expNeedForTheLevel[level]);
         expText.text = currentExp + " / " + expNeedForTheLevel[level] + " XP";
