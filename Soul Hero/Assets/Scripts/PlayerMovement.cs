@@ -18,6 +18,7 @@ public class PlayerMovement : MoveControl
     private Color particleMoveColor;
     private ParticleSystem.ColorOverLifetimeModule particleColor;
     private float offSetParticle = 0.1f;
+    public GUI_Script GUI_Script;
 
     private PlayerState playerState;
 
@@ -41,7 +42,10 @@ public class PlayerMovement : MoveControl
     {
         if (Input.GetMouseButtonDown(0))
         {
-            ClickMove();
+            if (!GUI_Script.ClickGUI())
+            {
+                ClickMove();
+            }
         }
         else if (playerState == PlayerState.WALK && navAgent.remainingDistance <= navAgent.stoppingDistance)
         {

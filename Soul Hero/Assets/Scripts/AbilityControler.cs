@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class AbilityControler : MonoBehaviour
 {
     public Ability[] abilities;
+    public bool[] unlockAbilities;
     protected CharacterAnimations characterAnimations;
     private PlayerMovement player;
     private ManaScript manaScript;
@@ -30,6 +31,7 @@ public class AbilityControler : MonoBehaviour
         SkillBackGround = new Image[skillUI.Length];
         SkillFill = new Image[skillUI.Length];
         manaScript = GetComponent<ManaScript>();
+        unlockAbilities = new bool[4] { true, false, false, false };
 
         cdNumber = 0;
         foreach (GameObject skills in skillUI)
@@ -90,7 +92,7 @@ public class AbilityControler : MonoBehaviour
     {
         if (abilities.Length > id)
         {
-            if (!abilities[id].gameObject.activeSelf)
+            if (!abilities[id].gameObject.activeSelf && unlockAbilities[id])  // no active and uncloked
             {
                 if (manaScript.CostMana(abilities[id].manaCost))
                 {

@@ -19,6 +19,9 @@ public class Experience : MonoBehaviour
 #pragma warning disable 0649
     [SerializeField]
     public Text levelText;
+#pragma warning disable 0649
+    [SerializeField]
+    public Text SkillPointText;
 
     public ParticleSystem levelUpParticle;
 
@@ -28,6 +31,7 @@ public class Experience : MonoBehaviour
         expFill.fillAmount = currentExp / expNeedForTheLevel[level];
         expText.text = currentExp + " / " + expNeedForTheLevel[level] + " XP";
         levelText.text = (level + 1).ToString();
+        SkillPointText.text = skillPoitns.ToString() ;
     }
 
     public void GetExp(int exp)
@@ -39,6 +43,7 @@ public class Experience : MonoBehaviour
             level++;
             skillPoitns++;
             levelText.text = (level + 1).ToString();
+            SkillPointText.text = skillPoitns.ToString();
             levelUpParticle.Play();
         }
         expFill.fillAmount = ((float)currentExp / (float)expNeedForTheLevel[level]);
