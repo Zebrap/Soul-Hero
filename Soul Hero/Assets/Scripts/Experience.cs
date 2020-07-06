@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Experience : MonoBehaviour
 {
     private int level = 0;
-    private int[] expNeedForTheLevel = new int[4] { 5, 8, 12, 15 };
+    private int[] expNeedForTheLevel = new int[6] { 5, 8, 12, 15, 20, 25 };
+    private int neeedExp = 5;
     public int currentExp;
     public int skillPoitns = 0;
 
@@ -28,8 +29,8 @@ public class Experience : MonoBehaviour
     void Awake()
     {
         levelUpParticle.Stop();
-        expFill.fillAmount = currentExp / expNeedForTheLevel[level];
-        expText.text = currentExp + " / " + expNeedForTheLevel[level] + " XP";
+        expFill.fillAmount = currentExp / neeedExp;
+        expText.text = currentExp + " / " + neeedExp + " XP";
         levelText.text = (level + 1).ToString();
         SkillPointText.text = skillPoitns.ToString() ;
     }
@@ -37,16 +38,31 @@ public class Experience : MonoBehaviour
     public void GetExp(int exp)
     {
         currentExp += exp;
-        if (currentExp >= expNeedForTheLevel[level])
+        if (currentExp >= neeedExp)
         {
-            currentExp -= expNeedForTheLevel[level];
+            currentExp -= neeedExp;
+            neeedExp += (int)(neeedExp * 0.2f);
             level++;
-            skillPoitns++;
             levelText.text = (level + 1).ToString();
-            SkillPointText.text = skillPoitns.ToString();
+            AddSKillPoint();
             levelUpParticle.Play();
+            GetExp(0);
         }
-        expFill.fillAmount = ((float)currentExp / (float)expNeedForTheLevel[level]);
-        expText.text = currentExp + " / " + expNeedForTheLevel[level] + " XP";
+        else
+        {
+            expFill.fillAmount = ((float)currentExp / (float)neeedExp);
+            expText.text = currentExp + " / " + neeedExp + " XP";
+        }
+    }
+
+    private void AddSKillPoint()
+    {
+        skillPoitns++;
+        SkillPointText.text = skillPoitns.ToString();
+    }
+    public void LoseSkillPoint()
+    {
+        skillPoitns--;
+        SkillPointText.text = skillPoitns.ToString();
     }
 }

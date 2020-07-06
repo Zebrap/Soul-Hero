@@ -115,5 +115,9 @@ public class PlayerMovement : MoveControl
         playerState = PlayerState.IDLE;
     }
 
+    public void AddAgentSpeed(float speed)
+    {
+        navAgent.speed += speed;
+    }
 
 }

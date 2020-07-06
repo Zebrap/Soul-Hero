@@ -130,4 +130,10 @@ public class HealthScript : MonoBehaviour
     {
         playerExperience.GetExp(experience);
     }
+
+    public void AddMaxHealth(int value)
+    {
+        healthMax += value;
+        health += value;
+    }
 }
