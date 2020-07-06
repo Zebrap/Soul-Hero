@@ -78,14 +78,21 @@ public class SkillTree : MonoBehaviour
 
         private void AddSkill(SkillManager.SkillType type)
         {
-            if (!skillManager.TryUnlock(type) || skillPoints.skillPoitns<1)
+            if(skillPoints.skillPoitns > 0)
             {
-                print("can't add skill");
+                if (!skillManager.TryUnlock(type))
+                {
+                    print("can't add skill");
+                }
+                else
+                {
+                    skillPoints.LoseSkillPoint();
+                    UpdateVisual();
+                }
             }
             else
             {
-                skillPoints.LoseSkillPoint();
-                UpdateVisual();
+                print("you need more points");
             }
         }
 
