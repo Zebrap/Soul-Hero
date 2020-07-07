@@ -9,7 +9,8 @@ public class Item
     public enum ItemType
     {
         BaseSword,
-        DarkSword
+        DarkSword,
+        HealthPotion
     }
 
     public ItemType itemType;
@@ -28,6 +29,20 @@ public class Item
             default:
             case ItemType.BaseSword: return ItemAssets.Instance.baseSword;
             case ItemType.DarkSword: return ItemAssets.Instance.darkSword;
+            case ItemType.HealthPotion: return ItemAssets.Instance.healthPotion;
+        }
+    }
+
+    public bool IsStackable()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.BaseSword:
+            case ItemType.DarkSword:
+                return false;
+            case ItemType.HealthPotion:
+                return true;
         }
     }
 }

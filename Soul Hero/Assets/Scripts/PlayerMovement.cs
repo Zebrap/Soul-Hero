@@ -39,7 +39,7 @@ public class PlayerMovement : MoveControl
         navAgent.avoidancePriority = 0;
         canMove = true;
 
-        inventory = new Inventory();
+        inventory = new Inventory(UseItem);
     }
 
     private void Start()
@@ -138,6 +138,17 @@ public class PlayerMovement : MoveControl
         {
             inventory.AddItem(itemWorld.GetItem());
             itemWorld.DestroySelf();
+        }
+    }
+
+    private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.HealthPotion:
+                print("heal");
+                inventory.RemoveItem(new Item(Item.ItemType.HealthPotion, 1));
+                break;
         }
     }
 }

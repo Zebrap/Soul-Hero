@@ -15,4 +15,5 @@ public class ItemAssets : MonoBehaviour
 
     public Sprite baseSword;
     public Sprite darkSword;
+    public Sprite healthPotion;
 }

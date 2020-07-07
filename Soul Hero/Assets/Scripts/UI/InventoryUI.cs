@@ -41,11 +41,26 @@ public class InventoryUI : MonoBehaviour
         float itemSlotCellSize = 70f;
         foreach(Item item in inventory.GetItemList())
         {
-            RectTransform ItemSlotReactTransform = Instantiate(itemSlot, ItemSlotContainer).GetComponent<RectTransform>();
-            ItemSlotReactTransform.gameObject.SetActive(true);
-            ItemSlotReactTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, -y * itemSlotCellSize);
-            Image image = ItemSlotReactTransform.Find("BackGround").GetComponent<Image>();
+            RectTransform itemSlotReactTransform = Instantiate(itemSlot, ItemSlotContainer).GetComponent<RectTransform>();
+            itemSlotReactTransform.gameObject.SetActive(true);
+            itemSlotReactTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, -y * itemSlotCellSize);
+
+            itemSlotReactTransform.GetComponent<Button>().onClick.AddListener(() => {
+                inventory.UseItem(item);
+              //  inventory.RemoveItem(item);
+            });
+
+            Image image = itemSlotReactTransform.Find("BackGround").GetComponent<Image>();
             image.sprite = item.GetSprite();
+            Text textAmount = itemSlotReactTransform.Find("Text").GetComponent<Text>();
+            if(item.amount > 1)
+            {
+                textAmount.text = item.amount.ToString();
+            }
+            else
+            {
+                textAmount.text = "";
+            }
             x++;
             if (x > 4)
             {
