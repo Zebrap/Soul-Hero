@@ -27,10 +27,13 @@ public class PlayerMovement : MoveControl
     [HideInInspector]
     public Inventory inventory;
 
+    private HealthScript healthScript;
+
     void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
         characterAnimations = GetComponent<CharacterAnimations>();
+        healthScript = GetComponent<HealthScript>();
         particleClick.Stop();
         particleMoveColor = particleClick.main.startColor.color;
         particleColor = particleClick.colorOverLifetime;
@@ -40,13 +43,6 @@ public class PlayerMovement : MoveControl
         canMove = true;
 
         inventory = new Inventory(UseItem);
-    }
-
-    private void Start()
-    {
- //       ItemWorld.SpawnItemWorld(new Vector3(0, 1, 3), new Item(Item.ItemType.BaseSword, 1));
-  //      ItemWorld.SpawnItemWorld(new Vector3(2, 1, 3), new Item(Item.ItemType.DarkSword, 1));
-   //     ItemWorld.SpawnItemWorld(new Vector3(1, 1, 4), new Item(Item.ItemType.BaseSword, 1));
     }
 
     private void Update()
@@ -146,7 +142,7 @@ public class PlayerMovement : MoveControl
         switch (item.itemType)
         {
             case Item.ItemType.HealthPotion:
-                print("heal");
+                healthScript.HealthRegeneration(30);
                 inventory.RemoveItem(new Item(Item.ItemType.HealthPotion, 1));
                 break;
         }

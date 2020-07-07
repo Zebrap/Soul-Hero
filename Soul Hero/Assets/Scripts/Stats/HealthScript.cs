@@ -117,12 +117,15 @@ public class HealthScript : MonoBehaviour
 
     public void HealthRegeneration(int regeneration)
     {
-        health = Mathf.Clamp(health + healthRegen, 0, healthMax);
-        healthFill.fillAmount = health / 100f;
-        healthFill.color = gradient.Evaluate(health / 100f);
-        if (healthText != null)
+        if (health > 0)
         {
-            healthText.text = health + " / " + healthMax;
+            health = Mathf.Clamp(health + regeneration, 0, healthMax);
+            healthFill.fillAmount = health / 100f;
+            healthFill.color = gradient.Evaluate(health / 100f);
+            if (healthText != null)
+            {
+                healthText.text = health + " / " + healthMax;
+            }
         }
     }
 
