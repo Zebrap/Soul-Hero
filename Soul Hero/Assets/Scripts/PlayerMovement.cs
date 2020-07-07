@@ -24,6 +24,8 @@ public class PlayerMovement : MoveControl
 
     public float reachedDestinationTime = 0.8f;
     public LayerMask IgnoreMe;
+    [HideInInspector]
+    public Inventory inventory;
 
     void Awake()
     {
@@ -36,6 +38,15 @@ public class PlayerMovement : MoveControl
         attack_Timer = wait_Beffore_Attack_Time;
         navAgent.avoidancePriority = 0;
         canMove = true;
+
+        inventory = new Inventory();
+    }
+
+    private void Start()
+    {
+ //       ItemWorld.SpawnItemWorld(new Vector3(0, 1, 3), new Item(Item.ItemType.BaseSword, 1));
+  //      ItemWorld.SpawnItemWorld(new Vector3(2, 1, 3), new Item(Item.ItemType.DarkSword, 1));
+   //     ItemWorld.SpawnItemWorld(new Vector3(1, 1, 4), new Item(Item.ItemType.BaseSword, 1));
     }
 
     private void Update()
@@ -120,4 +131,13 @@ public class PlayerMovement : MoveControl
         navAgent.speed += speed;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        ItemWorld itemWorld = other.GetComponent<ItemWorld>();
+        if(itemWorld != null)
+        {
+            inventory.AddItem(itemWorld.GetItem());
+            itemWorld.DestroySelf();
+        }
+    }
 }

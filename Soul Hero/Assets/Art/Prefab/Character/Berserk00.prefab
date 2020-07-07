@@ -28344,6 +28344,7 @@ MonoBehaviour:
   canMove: 0
   particleClick: {fileID: 0}
   particleEnemyColor: {r: 1, g: 0.08962262, b: 0.08962262, a: 1}
+  GUI_Script: {fileID: 0}
   reachedDestinationTime: 0.8
   IgnoreMe:
     serializedVersion: 2
@@ -28449,6 +28450,8 @@ MonoBehaviour:
   expFill: {fileID: 0}
   expText: {fileID: 0}
   levelText: {fileID: 0}
+  SkillPointText: {fileID: 0}
+  levelUpParticle: {fileID: 8386502041518225286}
 --- !u!114 &2018888079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28561,6 +28564,12 @@ PrefabInstance:
 --- !u!4 &6490685601740526899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 950362591504107808, guid: 3fda8b0f762ed3a4ba7496ba609dc93c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6279092754271214611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8386502041518225286 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2540319068781063061, guid: 3fda8b0f762ed3a4ba7496ba609dc93c,
     type: 3}
   m_PrefabInstance: {fileID: 6279092754271214611}
   m_PrefabAsset: {fileID: 0}
