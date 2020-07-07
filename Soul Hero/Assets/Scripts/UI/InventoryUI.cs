@@ -45,10 +45,22 @@ public class InventoryUI : MonoBehaviour
             itemSlotReactTransform.gameObject.SetActive(true);
             itemSlotReactTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, -y * itemSlotCellSize);
 
-            itemSlotReactTransform.GetComponent<Button>().onClick.AddListener(() => {
-                inventory.UseItem(item);
-              //  inventory.RemoveItem(item);
+            itemSlotReactTransform.GetComponent<ClickManager>().leftClick.AddListener(() =>
+            {
+                print("Left click");
             });
+            itemSlotReactTransform.GetComponent<ClickManager>().rightClick.AddListener(() =>
+            {
+                print("right click");
+            });
+            itemSlotReactTransform.GetComponent<ClickManager>().middleClick.AddListener(() =>
+            {
+                print("middle click");
+            });
+            /*   itemSlotReactTransform.GetComponent<Button>().onClick.AddListener(() => {
+                   inventory.UseItem(item);
+                 //  inventory.RemoveItem(item);
+               });*/
 
             Image image = itemSlotReactTransform.Find("BackGround").GetComponent<Image>();
             image.sprite = item.GetSprite();
