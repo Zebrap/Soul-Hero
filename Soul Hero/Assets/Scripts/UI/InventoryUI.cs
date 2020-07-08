@@ -21,6 +21,7 @@ public class InventoryUI : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<PlayerMovement>().inventory;
         inventory.OnITemListChange += InventoryOnItemListChange;
         RefreshInventoryItems();
+
     }
 
     private void InventoryOnItemListChange(object sender, EventArgs e)

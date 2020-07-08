@@ -18,9 +18,10 @@ public class ItemWorld : MonoBehaviour
     {
         this.item = item;
 
-  /*     GameObject instance = Instantiate(Resources.Load("Assets/Art/Prefab/Weapons/DarkSword", typeof(GameObject))) as GameObject;
-        print(instance.name);*/
-        // TODO set model
+        string path = "items/" + this.item.itemType;
+        GameObject instance = Instantiate(Resources.Load(path, typeof(GameObject))) as GameObject;
+        instance.transform.SetParent(transform);
+        instance.transform.position = transform.position;
     }
 
     public Item GetItem()
