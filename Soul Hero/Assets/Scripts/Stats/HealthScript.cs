@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour
 {
+    public event EventHandler DieEvent;
+
     public int healthMax = 100;
     public int health;
     public bool isDead = false;
@@ -91,6 +93,7 @@ public class HealthScript : MonoBehaviour
                 GetComponent<BoxCollider>().enabled = false;
                 GetComponent<NavMeshObstacle>().enabled = false;
                 healthUI.SetActive(false);
+                DieEvent?.Invoke(this, EventArgs.Empty);
                 StartCoroutine(DisableEnemy());
             }
         }
