@@ -35,15 +35,11 @@ public class InventoryUI : MonoBehaviour
             if (child == itemSlot) continue;
             Destroy(child.gameObject);
         }
-        // TODO Change to grid
-        int x = 0;
-        int y = 0;
-        float itemSlotCellSize = 70f;
         foreach(Item item in inventory.GetItemList())
         {
             RectTransform itemSlotReactTransform = Instantiate(itemSlot, ItemSlotContainer).GetComponent<RectTransform>();
             itemSlotReactTransform.gameObject.SetActive(true);
-            itemSlotReactTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, -y * itemSlotCellSize);
+           // itemSlotReactTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, -y * itemSlotCellSize);
 
             itemSlotReactTransform.GetComponent<ClickManager>().leftClick.AddListener(() =>
             {
@@ -72,12 +68,6 @@ public class InventoryUI : MonoBehaviour
             else
             {
                 textAmount.text = "";
-            }
-            x++;
-            if (x > 4)
-            {
-                x = 0;
-                y++;
             }
         }
     }

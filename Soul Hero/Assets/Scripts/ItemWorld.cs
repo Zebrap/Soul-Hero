@@ -17,6 +17,9 @@ public class ItemWorld : MonoBehaviour
     public void SetItem(Item item)
     {
         this.item = item;
+
+  /*     GameObject instance = Instantiate(Resources.Load("Assets/Art/Prefab/Weapons/DarkSword", typeof(GameObject))) as GameObject;
+        print(instance.name);*/
         // TODO set model
     }
 
