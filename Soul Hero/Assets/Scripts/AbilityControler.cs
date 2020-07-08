@@ -124,7 +124,7 @@ public class AbilityControler : MonoBehaviour
                 {
                     timerSkill[id] = 0;
                     player.NavMeshAgent_is_Stop(true);
-                    abilities[id].UseAbility(transform.position, transform.forward);
+                    abilities[id].UseAbility(this.gameObject);
                     characterAnimations.UseAbility(abilities[id].abilityEnum);
                     float timeCast = abilities[id].TimeCast();
                     StartCoroutine(CastTime(timeCast));

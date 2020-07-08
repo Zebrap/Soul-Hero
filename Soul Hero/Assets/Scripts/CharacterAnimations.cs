@@ -51,9 +51,12 @@ public class CharacterAnimations : MonoBehaviour
 
     public void UseAbility(AbilityEnum tag)
     {
-        for (int i = 0; i <= 5; i++)
+        if (tag != AbilityEnum.NoSkill)
         {
-            animator[i].SetTrigger(tag.ToString());
+            for (int i = 0; i <= 5; i++)
+            {
+                animator[i].SetTrigger(tag.ToString());
+            }
         }
     }
 }

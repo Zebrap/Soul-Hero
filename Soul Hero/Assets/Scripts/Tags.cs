@@ -32,5 +32,6 @@ public class AxisTags
 public enum AbilityEnum
 {
     BeamSkill,
+    HealSkill,
     NoSkill
 }

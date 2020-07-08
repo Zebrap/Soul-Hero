@@ -4,7 +4,7 @@ using UnityEngine;
 
 abstract public class Ability : MonoBehaviour
 {
-    public ParticleSystem particleEffect;
+    private ParticleSystem particleEffect;
     protected bool dealDamage;
     public int spellDamage = 30;
     protected Vector3 offSetPosition;
@@ -23,10 +23,11 @@ abstract public class Ability : MonoBehaviour
 
     void Awake()
     {
-        gameObject.SetActive(false);
         dealDamage = false;
         offSetPosition = transform.position;
         collidersList = new List<Collider>();
+        particleEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
+        gameObject.SetActive(false);
     }
 
     private void Update()
@@ -37,12 +38,12 @@ abstract public class Ability : MonoBehaviour
         }
     }
 
-    public void UseAbility(Vector3 position, Vector3 forward)
+    public void UseAbility(GameObject parent)
     {
         if (!gameObject.activeSelf)
         {
             timer = 0;
-            StartPosition(position, forward);
+            StartPosition(parent);
             gameObject.SetActive(true);
             particleEffect.Play();
             StartCoroutine(CollectColider());
@@ -55,6 +56,7 @@ abstract public class Ability : MonoBehaviour
         dealDamage = true;
         yield return new WaitForSeconds(timeEndCollider);
         DealDamage();
+        EffectOnTarget();
         yield return new WaitForSeconds(timeDeactive);
         gameObject.SetActive(false);
     }
@@ -96,7 +98,8 @@ abstract public class Ability : MonoBehaviour
     }
 
     protected abstract void MoveAblity();
-    protected abstract void StartPosition(Vector3 characterPosition, Vector3 forward);
+    protected abstract void StartPosition(GameObject parent);
+    protected abstract void EffectOnTarget();
 
 
 }

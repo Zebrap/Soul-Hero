@@ -11,14 +11,18 @@ public class WhityBombAbility : Ability
         transform.position = Vector3.Lerp(pos, offSetPosition + pos, timer);
     }
 
-    protected override void StartPosition(Vector3 characterPosition, Vector3 forward)
+    protected override void StartPosition(GameObject parent)
     {
-        pos = characterPosition + forward * fowardValue;
+        pos = parent.transform.position + parent.transform.forward * fowardValue;
         transform.position = pos;
     }
 
     protected override void ActionOnTarget(Collider target)
     {
         target.GetComponent<HealthScript>().ApplyDamage(spellDamage);
+    }
+
+    protected override void EffectOnTarget()
+    {
     }
 }
