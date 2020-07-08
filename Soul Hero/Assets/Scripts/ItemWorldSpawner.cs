@@ -5,8 +5,10 @@ using System;
 
 public class ItemWorldSpawner : MonoBehaviour
 {
-    public Item item;
+    public Item[] item;
     private HealthScript healthScript;
+    private float yPoxSpawn = 0.5f;
+    private float chanceToDrop = 0.5f;
 
     private void Start()
     {
@@ -16,8 +18,15 @@ public class ItemWorldSpawner : MonoBehaviour
 
     public void SpawnItem()
     {
-        ItemWorld.SpawnItemWorld(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), item);
-    //    Destroy(gameObject);
+        if (item.Length > 0)
+        {
+            float chance = UnityEngine.Random.Range(0.0f, 1.0f);
+            if(chance < chanceToDrop)
+            {
+                int r = UnityEngine.Random.Range(0, item.Length - 1);
+                ItemWorld.SpawnItemWorld(new Vector3(transform.position.x, transform.position.y + yPoxSpawn, transform.position.z), item[r]);
+            }
+        }
     }
 
 
