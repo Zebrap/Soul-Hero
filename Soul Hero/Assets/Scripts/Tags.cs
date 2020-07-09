@@ -22,6 +22,7 @@ public class Tags
     public const string PLAYER_TAG = "Player";
     public const string ENEMY_TAG = "Enemy";
     public const string MAINCAMERA_TAG = "MainCamera";
+    public const string MODEL_TAG = "Model";
 }
 
 public class AxisTags
