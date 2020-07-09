@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class Ability : MonoBehaviour
+abstract public class Ability : MonoBehaviour, IAbility
 {
     private ParticleSystem particleEffect;
     protected bool dealDamage;
@@ -85,7 +85,7 @@ abstract public class Ability : MonoBehaviour
         collidersList.Clear();
     }
 
-    protected virtual void ActionOnTarget(Collider target){}
+    protected virtual void ActionOnTarget(Collider target) { }
 
     public float TimeCast()
     {

@@ -5,22 +5,22 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class HealthScript : MonoBehaviour
+public class HealthScript : MonoBehaviour, IHealthScript
 {
     public event EventHandler DieEvent;
 
-    public float healthMax = 100f;
-    public int health;
+    public float healthMax { get; set; } = 100f;
+    public int health { get; set; }
     public bool isDead = false;
     private bool isPlayer;
     private CharacterAnimations characterAnimations;
-    #pragma warning disable 0649
+#pragma warning disable 0649
     [SerializeField]
     private GameObject healthUI;
-    #pragma warning disable 0649
+#pragma warning disable 0649
     [SerializeField]
     private Image healthFill;
-    #pragma warning disable 0649
+#pragma warning disable 0649
     [SerializeField]
     private Text healthText;
 
@@ -75,7 +75,7 @@ public class HealthScript : MonoBehaviour
             healthFill.fillAmount = health / healthMax;
             healthFill.color = gradient.Evaluate(health / healthMax);
         }
-        if(health <= 0)
+        if (health <= 0)
         {
             characterAnimations.Die();
             isDead = true;

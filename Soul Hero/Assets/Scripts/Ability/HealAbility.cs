@@ -6,8 +6,8 @@ public class HealAbility : Ability
 {
     private GameObject target;
     private HealthScript healthTarget;
-    private float healTime = 4f;
-    private float healInterval = 0.2f;
+    public float healTime = 4f;
+    public float healInterval = 0.2f;
 
     protected override void EffectOnTarget()
     {
