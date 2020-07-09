@@ -454,6 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864ec0f2ef8ed0742be4d3a49f3b3785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberControllers: 5
 --- !u!114 &7826756427951605980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,8 +564,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemType: 2
-    amount: 1
+  - itemType: 0
+    amount: 0
+  - itemType: 0
+    amount: 0
 --- !u!1 &5049198870696336080
 GameObject:
   m_ObjectHideFlags: 0

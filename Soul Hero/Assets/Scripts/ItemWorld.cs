@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemWorld : MonoBehaviour
 {
+    public Transform prefabItemWorld { get; private set; }
+
     public static ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
         Transform transform = Instantiate(ItemAssets.Instance.prefabItemWold, position, Quaternion.identity);

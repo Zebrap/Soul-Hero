@@ -40,7 +40,6 @@ public class InventoryUI : MonoBehaviour
         {
             RectTransform itemSlotReactTransform = Instantiate(itemSlot, ItemSlotContainer).GetComponent<RectTransform>();
             itemSlotReactTransform.gameObject.SetActive(true);
-           // itemSlotReactTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, -y * itemSlotCellSize);
 
             itemSlotReactTransform.GetComponent<ClickManager>().leftClick.AddListener(() =>
             {
@@ -54,10 +53,6 @@ public class InventoryUI : MonoBehaviour
             {
                 print("middle click");
             });
-            /*   itemSlotReactTransform.GetComponent<Button>().onClick.AddListener(() => {
-                   inventory.UseItem(item);
-                 //  inventory.RemoveItem(item);
-               });*/
 
             Image image = itemSlotReactTransform.Find("BackGround").GetComponent<Image>();
             image.sprite = item.GetSprite();

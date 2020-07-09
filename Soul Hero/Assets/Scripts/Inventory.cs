@@ -14,11 +14,6 @@ public class Inventory
     {
         this.useItemAction = useItemAction;
         itemList = new List<Item>();
-  /*      AddItem(new Item(Item.ItemType.BaseSword, 1));
-        AddItem(new Item(Item.ItemType.DarkSword, 1));
-        AddItem(new Item(Item.ItemType.DarkSword, 1));
-        AddItem(new Item(Item.ItemType.DarkSword, 1));
-        AddItem(new Item(Item.ItemType.DarkSword, 1));*/
     }
 
     public void AddItem(Item item)

@@ -5,11 +5,12 @@ using UnityEngine;
 public class CharacterAnimations : MonoBehaviour
 {
     private Animator[] animator;
+    public int numberControllers;
 
     void Awake()
     {
-        animator = new Animator[6];
-        for (int i = 0; i <= 5; i++)
+        animator = new Animator[numberControllers+1];
+        for (int i = 0; i <= numberControllers; i++)
         {
             animator[i] = transform.GetChild(i).GetComponent<Animator>();
         }
@@ -17,7 +18,7 @@ public class CharacterAnimations : MonoBehaviour
 
     public void Walk(bool walk)
     {
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i <= numberControllers; i++)
         {
             animator[i].SetBool(AnimationsTags.WALK, walk);
         }
@@ -35,7 +36,7 @@ public class CharacterAnimations : MonoBehaviour
 
     public void Attack3()
     {
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i <= numberControllers; i++)
         {
             animator[i].SetTrigger(AnimationsTags.ATTACK3);
         }
@@ -43,7 +44,7 @@ public class CharacterAnimations : MonoBehaviour
 
     public void Die()
     {
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i <= numberControllers; i++)
         {
             animator[i].SetTrigger(AnimationsTags.DIE);
         }
@@ -53,7 +54,7 @@ public class CharacterAnimations : MonoBehaviour
     {
         if (tag != AbilityEnum.NoSkill)
         {
-            for (int i = 0; i <= 5; i++)
+            for (int i = 0; i <= numberControllers; i++)
             {
                 animator[i].SetTrigger(tag.ToString());
             }

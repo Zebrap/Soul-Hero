@@ -29,7 +29,6 @@ public class SkillTree : MonoBehaviour
         foreach (Ability ability in abilities.abilities)
         {
             skill[id].transform.Find("Skill_Image").GetComponent<Image>().sprite = ability.GetComponent<Image>().sprite;
-       //     skill[id].GetComponent<Button>().onClick.AddListener(() => AddSkillPoint(id));
             id++;
         }
     }

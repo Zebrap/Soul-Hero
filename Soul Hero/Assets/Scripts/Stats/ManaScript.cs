@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ManaScript : MonoBehaviour
 {
-    public int manaMax = 100;
+    public float manaMax = 100f;
     public int mana;
     public int manaRegen = 1;
 
@@ -21,14 +21,14 @@ public class ManaScript : MonoBehaviour
 
     private void Awake()
     {
-        mana = manaMax;
+        mana = (int)manaMax;
         if (manaText != null)
         {
             manaText.text = mana + " / " + manaMax;
         }
         if (manaFill != null)
         {
-            manaFill.fillAmount = mana / 100f;
+            manaFill.fillAmount = mana / manaMax;
         }
     }
 
@@ -37,7 +37,7 @@ public class ManaScript : MonoBehaviour
         if (mana >= manaCost)
         {
             mana -= manaCost;
-            manaFill.fillAmount = mana / 100f;
+            manaFill.fillAmount = mana / manaMax;
             manaText.text = mana + " / " + manaMax;
             return true;
         }
@@ -62,7 +62,7 @@ public class ManaScript : MonoBehaviour
 
     public void ManaRegeneration(int regeneration)
     {
-        mana = Mathf.Clamp(mana + regeneration, 0, manaMax);
+        mana = Mathf.Clamp(mana + regeneration, 0, (int)manaMax);
         manaFill.fillAmount = mana / 100f;
         manaText.text = mana + " / " + manaMax;
     }

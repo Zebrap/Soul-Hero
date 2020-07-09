@@ -9,7 +9,7 @@ public class HealthScript : MonoBehaviour
 {
     public event EventHandler DieEvent;
 
-    public int healthMax = 100;
+    public float healthMax = 100f;
     public int health;
     public bool isDead = false;
     private bool isPlayer;
@@ -37,7 +37,7 @@ public class HealthScript : MonoBehaviour
 
     private void Awake()
     {
-        health = healthMax;
+        health = (int)healthMax;
         characterAnimations = GetComponent<CharacterAnimations>();
         if (healthText != null)
         {
@@ -45,8 +45,8 @@ public class HealthScript : MonoBehaviour
         }
         if (healthFill != null)
         {
-            healthFill.fillAmount = health / 100f;
-            healthFill.color = gradient.Evaluate(health / 100f);
+            healthFill.fillAmount = (health / healthMax);
+            healthFill.color = gradient.Evaluate(health / healthMax);
         }
     }
 
@@ -72,8 +72,8 @@ public class HealthScript : MonoBehaviour
         }
         if (healthFill != null)
         {
-            healthFill.fillAmount = health / 100f;
-            healthFill.color = gradient.Evaluate(health / 100f);
+            healthFill.fillAmount = health / healthMax;
+            healthFill.color = gradient.Evaluate(health / healthMax);
         }
         if(health <= 0)
         {
@@ -107,14 +107,17 @@ public class HealthScript : MonoBehaviour
 
     private void Update()
     {
-        if (time < period)
+        if (healthRegen > 0)
         {
-            time += Time.deltaTime;
-        }
-        else
-        { 
-            HealthRegeneration(healthRegen);
-            time = 0;
+            if (time < period)
+            {
+                time += Time.deltaTime;
+            }
+            else
+            {
+                HealthRegeneration(healthRegen);
+                time = 0;
+            }
         }
     }
 
@@ -122,9 +125,9 @@ public class HealthScript : MonoBehaviour
     {
         if (health > 0)
         {
-            health = Mathf.Clamp(health + regeneration, 0, healthMax);
-            healthFill.fillAmount = health / 100f;
-            healthFill.color = gradient.Evaluate(health / 100f);
+            health = Mathf.Clamp(health + regeneration, 0, (int)healthMax);
+            healthFill.fillAmount = health / healthMax;
+            healthFill.color = gradient.Evaluate(health / healthMax);
             if (healthText != null)
             {
                 healthText.text = health + " / " + healthMax;
@@ -141,5 +144,14 @@ public class HealthScript : MonoBehaviour
     {
         healthMax += value;
         health += value;
+        if (healthText != null)
+        {
+            healthText.text = health + " / " + healthMax;
+        }
+        if (healthFill != null)
+        {
+            healthFill.fillAmount = health / healthMax;
+            healthFill.color = gradient.Evaluate(health / healthMax);
+        }
     }
 }

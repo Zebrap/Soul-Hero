@@ -12,8 +12,4 @@ public class ItemAssets : MonoBehaviour
     }
 
     public Transform prefabItemWold;
-
-    public Sprite baseSword;
-    public Sprite darkSword;
-    public Sprite healthPotion;
 }
