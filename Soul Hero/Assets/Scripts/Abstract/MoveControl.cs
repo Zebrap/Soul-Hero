@@ -20,7 +20,7 @@ abstract public class MoveControl : MonoBehaviour
     public float attack_Distance = 1f;
     public float attack_Distance_OffSet = 1f;
 
-    protected float wait_Beffore_Attack_Time = 1f;
+    protected float wait_Beffore_Attack_Time = 1.4f;
     protected float attack_Timer;
 
     public int attack_damage = 10;
@@ -30,28 +30,47 @@ abstract public class MoveControl : MonoBehaviour
 
     protected void AttackSingleTarget()
     {
-        if (Vector3.Distance(transform.position, target.transform.position) >=
-   attack_Distance + attack_Distance_OffSet)
+        /*     if (Vector3.Distance(transform.position, target.transform.position) >=
+                                 attack_Distance + attack_Distance_OffSet)
+             {
+                 SetState();
+                 if (navAgent.enabled)
+                 {
+                     navAgent.isStopped = false;
+                 }
+             }
+             else
+             {
+                 RotateToTarget();
+                 if (navAgent.enabled)
+                 {
+                     navAgent.velocity = Vector3.zero;
+                     navAgent.isStopped = true;
+                 }
+                 characterAnimations.Walk(false);
+             }*/
+        RotateToTarget();
+        if (navAgent.enabled)
         {
-            SetState();
-            if (navAgent.enabled)
-            {
-                navAgent.isStopped = false;
-            }
+            navAgent.velocity = Vector3.zero;
+            navAgent.isStopped = true;
         }
-        else
-        {
-            RotateToTarget();
-            if (navAgent.enabled)
-            {
-                navAgent.velocity = Vector3.zero;
-                navAgent.isStopped = true;
-            }
-            characterAnimations.Walk(false);
-        }
+        characterAnimations.Walk(false);
+
         attack_Timer += Time.deltaTime;
-        if (attack_Timer > wait_Beffore_Attack_Time)
+        if (attack_Timer > wait_Beffore_Attack_Time) // TODO change to animation time, animation event
         {
+            if (Vector3.Distance(transform.position, target.transform.position) >=
+                            attack_Distance + attack_Distance_OffSet)           //check distanace if want to attack
+            {
+                SetState();
+                if (navAgent.enabled)
+                {
+                    navAgent.isStopped = false;
+                }
+                return;
+            }
+
             target.GetComponent<HealthScript>().ApplyDamage(attack_damage);
             characterAnimations.Attack3();
             attack_Timer = 0f;
