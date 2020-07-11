@@ -31,6 +31,5 @@ namespace Tests
             yield return new WaitForSeconds(v);
             Assert.AreEqual(60, healthScript.health);
         }
-
     }
 }

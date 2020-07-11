@@ -43,6 +43,7 @@ public class PlayerMovement : MoveControl
         canMove = true;
 
         inventory = new Inventory(UseItem);
+        inventory.AddItem(new Item(Item.ItemType.BaseSword, 1));
     }
 
     private void Update()

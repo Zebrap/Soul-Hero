@@ -12,6 +12,7 @@ public class ClickManager : MonoBehaviour, IPointerClickHandler
     public UnityEvent rightClick;
  //   public UnityEvent doubleClick;
 
+
     public void OnPointerClick(PointerEventData eventData)
     {
      /*   if (eventData.clickCount == 2)
@@ -23,5 +24,4 @@ public class ClickManager : MonoBehaviour, IPointerClickHandler
         else if (eventData.button == PointerEventData.InputButton.Right)
             rightClick.Invoke();
     }
-
 }
