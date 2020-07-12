@@ -42,7 +42,7 @@ public class PlayerMovement : MoveControl
         navAgent.avoidancePriority = 0;
         canMove = true;
 
-        inventory = new Inventory(UseItem);
+        inventory = new Inventory(UseItem, 20);
         inventory.AddItem(new Item(Item.ItemType.BaseSword, 1));
     }
 
@@ -131,10 +131,12 @@ public class PlayerMovement : MoveControl
     private void OnTriggerEnter(Collider other)
     {
         ItemWorld itemWorld = other.GetComponent<ItemWorld>();
-        if(itemWorld != null)
+        if (itemWorld != null)
         {
-            inventory.AddItem(itemWorld.GetItem());
-            itemWorld.DestroySelf();
+            if (inventory.AddItem(itemWorld.GetItem()))
+            {
+                itemWorld.DestroySelf();
+            }
         }
     }
 

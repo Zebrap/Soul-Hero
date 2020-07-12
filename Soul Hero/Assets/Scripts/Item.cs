@@ -22,6 +22,12 @@ public class Item
         this.amount = amount;
     }
 
+    public Item(ItemType type)
+    {
+        this.itemType = type;
+        this.amount = 1;
+    }
+
     public Sprite GetSprite()
     {
         string path = "items/Sprite/" + itemType;

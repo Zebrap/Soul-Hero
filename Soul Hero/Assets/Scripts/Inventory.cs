@@ -9,14 +9,25 @@ public class Inventory
 
     private List<Item> itemList;
     private Action<Item> useItemAction;
+    public InventorySlot[] itemArrayInventory;
 
-    public Inventory(Action<Item> useItemAction)
+    public Inventory(Action<Item> useItemAction, int inventorySlots)
     {
         this.useItemAction = useItemAction;
         itemList = new List<Item>();
+        itemArrayInventory = new InventorySlot[inventorySlots];
+        for (int i = 0; i < inventorySlots; i++)
+        {
+            itemArrayInventory[i] = new InventorySlot(i);
+        }
+        AddItem(new Item(Item.ItemType.HealthPotion,10));
+        for(int i=0; i<5; i++)
+        {
+            AddItem(new Item(Item.ItemType.DarkSword));
+        }
     }
 
-    public void AddItem(Item item)
+    public bool AddItem(Item item)
     {
         if (item.IsStackable())
         {
@@ -31,14 +42,31 @@ public class Inventory
             }
             if (!itemAlreadyInInventory)
             {
-                itemList.Add(item);
+                if (GetEmptyInventorySlot() != null)
+                {
+                    itemList.Add(item);
+                    GetEmptyInventorySlot().SetItem(item);
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
         else
         {
-            itemList.Add(item);
+            if (GetEmptyInventorySlot() != null)
+            {
+                itemList.Add(item);
+                GetEmptyInventorySlot().SetItem(item);
+            }
+            else
+            {
+                return false;
+            }
         }
         OnITemListChange?.Invoke(this, EventArgs.Empty);
+        return true;
     }
 
     public void RemoveItem(Item item)
@@ -56,13 +84,27 @@ public class Inventory
             }
             if (itemInInventory!=null && itemInInventory.amount<=0)
             {
+                GetInventorySlotWithItem(itemInInventory).RemoveItem();
                 itemList.Remove(itemInInventory);
             }
         }
         else
         {
+            GetInventorySlotWithItem(item).RemoveItem();
             itemList.Remove(item);
         }
+        OnITemListChange?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void AddItem(Item item, InventorySlot inventorySlot)
+    {
+        int am = item.amount;
+        RemoveItem(item);
+        item.amount = am;
+        Debug.Log(item.amount);
+        itemList.Add(item);
+        inventorySlot.SetItem(item);
+
         OnITemListChange?.Invoke(this, EventArgs.Empty);
     }
 
@@ -74,5 +116,69 @@ public class Inventory
     public List<Item> GetItemList()
     {
         return itemList;
+    }
+
+    public InventorySlot[] GetInventorySlotArray()
+    {
+        return itemArrayInventory;
+    }
+
+    public InventorySlot GetEmptyInventorySlot()
+    {
+        foreach (InventorySlot inventorySlot in itemArrayInventory)
+        {
+            if (inventorySlot.IsEmpty())
+            {
+                return inventorySlot;
+            }
+        }
+        Debug.Log("Cannot find an empty InventorySlot!");
+        return null;
+    }
+
+    public InventorySlot GetInventorySlotWithItem(Item item)
+    {
+        foreach (InventorySlot inventorySlot in itemArrayInventory)
+        {
+            if (inventorySlot.GetItem() == item)
+            {
+                return inventorySlot;
+            }
+        }
+        Debug.Log("Cannot find Item " + item + " in a InventorySlot!");
+        return null;
+    }
+
+    public class InventorySlot
+    {
+
+        private int index;
+        private Item item;
+
+        public InventorySlot(int index)
+        {
+            this.index = index;
+        }
+
+        public Item GetItem()
+        {
+            return item;
+        }
+
+        public void SetItem(Item item)
+        {
+            this.item = item;
+        }
+
+        public void RemoveItem()
+        {
+            item = null;
+        }
+
+        public bool IsEmpty()
+        {
+            return item == null;
+        }
+
     }
 }

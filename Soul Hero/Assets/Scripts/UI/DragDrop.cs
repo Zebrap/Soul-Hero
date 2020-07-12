@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private RectTransform rectTransform;
     private CanvasGroup CanvasGroup;
     private Item item;
+    private Vector2 startPose;
+    private Transform myParent;
 
     private void Awake()
     {
@@ -20,6 +23,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        startPose = rectTransform.anchoredPosition;
+        transform.SetParent(canvas.transform);
         CanvasGroup.alpha = 0.8f;
         CanvasGroup.blocksRaycasts = false;
     }
@@ -33,6 +38,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         CanvasGroup.alpha = 1f;
         CanvasGroup.blocksRaycasts = true;
+        CompareParent();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -42,7 +48,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnDrop(PointerEventData eventData)
     {
-
     }
 
     public void SetItem(Item item)
@@ -53,4 +58,29 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         return item;
     }
+
+    public void SetCanvas(Canvas canvas)
+    {
+        this.canvas = canvas;
+    }
+
+    public void SetMyParent(Transform myparent)
+    {
+        myParent = myparent;
+    }
+
+    private void CompareParent()
+    {
+        if(transform.parent == canvas.transform)
+        {
+            transform.SetParent(myParent);
+            rectTransform.anchoredPosition = startPose;
+            Debug.Log("Reset pose");
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
 }
