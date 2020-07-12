@@ -47,4 +47,18 @@ public class Item
                 return true;
         }
     }
+
+
+    public PlayerEquipment.EquipSlot GetEquipSlot()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.HealthPotion:
+                return PlayerEquipment.EquipSlot.UseItem;
+            case ItemType.DarkSword:
+            case ItemType.BaseSword:
+                return PlayerEquipment.EquipSlot.Weapon;
+        }
+    }
 }

@@ -43,7 +43,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Down");
+      //  Debug.Log("Down");
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -75,7 +75,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         {
             transform.SetParent(myParent);
             rectTransform.anchoredPosition = startPose;
-            Debug.Log("Reset pose");
         }
         else
         {

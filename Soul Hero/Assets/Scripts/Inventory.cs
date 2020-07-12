@@ -101,7 +101,7 @@ public class Inventory
         int am = item.amount;
         RemoveItem(item);
         item.amount = am;
-        Debug.Log(item.amount);
+
         itemList.Add(item);
         inventorySlot.SetItem(item);
 
