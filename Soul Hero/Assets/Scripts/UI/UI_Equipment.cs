@@ -17,7 +17,7 @@ public class UI_Equipment : MonoBehaviour
 
     private void Awake()
     {
-        itemContainer = transform.Find("ItemSlotContainer");
+        itemContainer = transform.Find(UiTags.ITEM_SLOT_CONTAINER);
         weaponSlot = transform.Find("weaponSlot").GetComponent<EquipmentSlot>();
         useSlot1 = transform.Find("useSlot1").GetComponent<EquipmentSlot>();
 
@@ -58,7 +58,7 @@ public class UI_Equipment : MonoBehaviour
         Item weaponItem = playerEquipment.GetWeaponItem();
         if(weaponItem != null)
         {
-            Transform uiItemTransform = Instantiate(pfInventoryItem, weaponSlot.transform.Find("SkillBG"));
+            Transform uiItemTransform = Instantiate(pfInventoryItem, weaponSlot.transform.Find(UiTags.BACKGROUND));
             uiItemTransform.gameObject.SetActive(true);
             Image image = uiItemTransform.GetComponent<Image>();
             image.sprite = weaponItem.GetSprite();
@@ -66,7 +66,7 @@ public class UI_Equipment : MonoBehaviour
         Item useItem = playerEquipment.GetUseItem1();
         if (useItem != null)
         {
-            Transform uiItemTransform = Instantiate(pfInventoryItem, useSlot1.transform.Find("SkillBG"));
+            Transform uiItemTransform = Instantiate(pfInventoryItem, useSlot1.transform.Find(UiTags.BACKGROUND));
             uiItemTransform.gameObject.SetActive(true);
             Image image = uiItemTransform.GetComponent<Image>();
             image.sprite = useItem.GetSprite();

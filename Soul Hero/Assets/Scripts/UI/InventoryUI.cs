@@ -19,8 +19,8 @@ public class InventoryUI : MonoBehaviour
 
     private void Awake()
     {
-        ItemSlotContainer = transform.Find("ItemSlotContainer");
-        itemSlot = transform.Find("ItemSlot");
+        ItemSlotContainer = transform.Find(UiTags.ITEM_SLOT_CONTAINER);
+        itemSlot = transform.Find(UiTags.ITEM_SLOT);
     }
 
     private void Start()
@@ -51,7 +51,7 @@ public class InventoryUI : MonoBehaviour
 
             if (!slot.IsEmpty())
             {
-                Transform uiItem = Instantiate(pfInventoryItem, itemSlotReactTransform.Find("BackGround").transform);
+                Transform uiItem = Instantiate(pfInventoryItem, itemSlotReactTransform.Find(UiTags.BACKGROUND).transform);
                 
                 //    itemSlotReactTransform.GetComponent<DragDrop>().SetItem(item);
 
@@ -60,8 +60,8 @@ public class InventoryUI : MonoBehaviour
                 DragDrop dragDrop = uiItem.GetComponent<DragDrop>();
                 dragDrop.SetItem(item);
                 dragDrop.SetCanvas(canvas);
-                dragDrop.SetMyParent(itemSlotReactTransform.Find("BackGround").transform);
-                Text textAmount = itemSlotReactTransform.Find("Text").GetComponent<Text>();
+                dragDrop.SetMyParent(itemSlotReactTransform.Find(UiTags.BACKGROUND).transform);
+                Text textAmount = itemSlotReactTransform.Find(UiTags.TEXT).GetComponent<Text>();
                 if (item.amount > 1)
                 {
                     textAmount.text = item.amount.ToString();
@@ -73,7 +73,7 @@ public class InventoryUI : MonoBehaviour
             }
             else
             {
-                Text textAmount = itemSlotReactTransform.Find("Text").GetComponent<Text>();
+                Text textAmount = itemSlotReactTransform.Find(UiTags.TEXT).GetComponent<Text>();
                 textAmount.text = "";
             }
             Inventory.InventorySlot tmpInventorySlot = slot;
@@ -82,7 +82,6 @@ public class InventoryUI : MonoBehaviour
             UIitemSlot.SetOnDropAction((Item draggItem) =>
             {
                 Item draggedItem = draggItem;
-                print(draggedItem.amount);
                 inventory.AddItem(draggedItem, tmpInventorySlot);
             });
         }

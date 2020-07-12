@@ -25,6 +25,15 @@ public class Tags
     public const string MODEL_TAG = "Model";
 }
 
+public class UiTags
+{
+    public const string BACKGROUND = "BackGround";
+    public const string TEXT = "Text";
+    public const string ITEM_SLOT_CONTAINER = "ItemSlotContainer";
+    public const string ITEM_SLOT = "ItemSlot";
+
+}
+
 public class AxisTags
 {
     public const string AXIS_SCROLLWHEEL = "Mouse ScrollWheel";
