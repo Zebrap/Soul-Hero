@@ -6,10 +6,12 @@ using UnityEngine;
 public class PlayerEquipment : MonoBehaviour
 {
     public event EventHandler OnEquipmentChanged;
+    public event EventHandler OnWeaponChange;
     [HideInInspector]
     public Inventory inventory;
 
     public Transform WeaponPlayerSlot;
+    private WeaponStats weaponStats;
 
     public enum EquipSlot
     {
@@ -62,11 +64,13 @@ public class PlayerEquipment : MonoBehaviour
         }
         string path = "items/" + this.weaponItem.itemType;
         GameObject instance = Instantiate(Resources.Load(path, typeof(GameObject))) as GameObject;
+        weaponStats = instance.GetComponent<WeaponStats>();
         Vector3 pos = instance.transform.position;
         Quaternion rot = instance.transform.rotation;
         instance.transform.SetParent(WeaponPlayerSlot);
         instance.transform.localPosition = pos;
         instance.transform.localRotation = rot;
+        OnWeaponChange?.Invoke(this, EventArgs.Empty);
     }
 
     private void SetUseItem1(Item useItem)
@@ -89,6 +93,11 @@ public class PlayerEquipment : MonoBehaviour
         }
         this.useItem2 = useItem;
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public WeaponStats GetWeaponStats()
+    {
+        return weaponStats;
     }
 
     private void UnequipWeapon()

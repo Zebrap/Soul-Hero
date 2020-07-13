@@ -25,13 +25,10 @@ public class PlayerMovement : MoveControl
     public float reachedDestinationTime = 0.8f;
     public LayerMask IgnoreMe;
 
-    private HealthScript healthScript;
-
     void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
         characterAnimations = GetComponent<CharacterAnimations>();
-        healthScript = GetComponent<HealthScript>();
         particleClick.Stop();
         particleMoveColor = particleClick.main.startColor.color;
         particleColor = particleClick.colorOverLifetime;

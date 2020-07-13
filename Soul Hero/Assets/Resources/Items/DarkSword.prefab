@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5373875406992040960}
   - component: {fileID: 5373875406990911168}
   - component: {fileID: 5373875406982930882}
+  - component: {fileID: -1910744451328260812}
   m_Layer: 0
   m_Name: DarkSword
   m_TagString: Untagged
@@ -95,3 +96,16 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &-1910744451328260812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5373875406988654602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52110c77b6b9f3e4d9d51471aa831574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 70

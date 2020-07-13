@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9221020118152817763}
   - component: {fileID: 9221020118152817773}
   - component: {fileID: 9221020118152817762}
+  - component: {fileID: -4913280098127151927}
   m_Layer: 0
   m_Name: BaseSword
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-4913280098127151927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221020118152817760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52110c77b6b9f3e4d9d51471aa831574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 10
