@@ -9,15 +9,19 @@ public class PlayerEquipment : MonoBehaviour
     [HideInInspector]
     public Inventory inventory;
 
+    public Transform WeaponPlayerSlot;
+
     public enum EquipSlot
     {
         Weapon,
-        UseItem,
+        UseItem1,
+        UseItem2,
     }
 
 
     private Item weaponItem;
     private Item useItem1;
+    private Item useItem2;
 
     private void Awake()
     {
@@ -34,6 +38,10 @@ public class PlayerEquipment : MonoBehaviour
     {
         return useItem1;
     }
+    public Item GetUseItem2()
+    {
+        return useItem2;
+    }
 
     private void SetWeaponItem(Item weaponItem)
     {
@@ -43,6 +51,22 @@ public class PlayerEquipment : MonoBehaviour
         }
         this.weaponItem = weaponItem;
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+        VisualChangeWeaponPlayer();
+    }
+
+    private void VisualChangeWeaponPlayer()
+    {
+        foreach (Transform child in WeaponPlayerSlot)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        string path = "items/" + this.weaponItem.itemType;
+        GameObject instance = Instantiate(Resources.Load(path, typeof(GameObject))) as GameObject;
+        Vector3 pos = instance.transform.position;
+        Quaternion rot = instance.transform.rotation;
+        instance.transform.SetParent(WeaponPlayerSlot);
+        instance.transform.localPosition = pos;
+        instance.transform.localRotation = rot;
     }
 
     private void SetUseItem1(Item useItem)
@@ -53,6 +77,17 @@ public class PlayerEquipment : MonoBehaviour
             inventory.AddItem(item);
         }
         this.useItem1 = useItem;
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void SetUseItem2(Item useItem)
+    {
+        Item item = GetUseItem2();
+        if (item != null)
+        {
+            inventory.AddItem(item);
+        }
+        this.useItem2 = useItem;
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -73,7 +108,7 @@ public class PlayerEquipment : MonoBehaviour
                     SetWeaponItem(item);
                     inventory.RemoveItem_SaveStack(item);
                     break;
-                case EquipSlot.UseItem:
+                case EquipSlot.UseItem1:
                     SetUseItem1(item);
                     inventory.RemoveItem_SaveStack(item);
                     break;

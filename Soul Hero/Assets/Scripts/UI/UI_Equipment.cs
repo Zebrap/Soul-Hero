@@ -8,10 +8,13 @@ public class UI_Equipment : MonoBehaviour
 {
     #pragma warning disable 0649
     [SerializeField] private Transform pfInventoryItem;
+#pragma warning disable 0649
+    [SerializeField] private Canvas canvas;
 
     private Transform itemContainer;
     private EquipmentSlot weaponSlot;
     private EquipmentSlot useSlot1;
+  //  private EquipmentSlot useSlot2;
 
     private PlayerEquipment playerEquipment;
 
@@ -20,9 +23,11 @@ public class UI_Equipment : MonoBehaviour
         itemContainer = transform.Find(UiTags.ITEM_SLOT_CONTAINER);
         weaponSlot = transform.Find("weaponSlot").GetComponent<EquipmentSlot>();
         useSlot1 = transform.Find("useSlot1").GetComponent<EquipmentSlot>();
+      //  useSlot2 = transform.Find("useSlot2").GetComponent<EquipmentSlot>();
 
         weaponSlot.OnItemDropped += WeaponSlot_OnItemDropped;
         useSlot1.OnItemDropped += UseSlot1_OnItemDropped;
+    //    useSlot1.OnItemDropped += UseSlot2_OnItemDropped;
     }
 
     private void Start()
@@ -31,10 +36,15 @@ public class UI_Equipment : MonoBehaviour
         UpdateVisual();
         playerEquipment.OnEquipmentChanged += CharacterEquipment_OnEquipmentChanged;
     }
+    /*
+    private void UseSlot2_OnItemDropped(object sender, EquipmentSlot.OnItemDroppedEventArgs e)
+    {
+        playerEquipment.TryEquipItem(PlayerEquipment.EquipSlot.UseItem2, e.item);
+    }*/
 
     private void UseSlot1_OnItemDropped(object sender, EquipmentSlot.OnItemDroppedEventArgs e)
     {
-        playerEquipment.TryEquipItem(PlayerEquipment.EquipSlot.UseItem, e.item);
+        playerEquipment.TryEquipItem(PlayerEquipment.EquipSlot.UseItem1, e.item);
     }
 
     private void WeaponSlot_OnItemDropped(object sender, EquipmentSlot.OnItemDroppedEventArgs e)
@@ -62,6 +72,10 @@ public class UI_Equipment : MonoBehaviour
             uiItemTransform.gameObject.SetActive(true);
             Image image = uiItemTransform.GetComponent<Image>();
             image.sprite = weaponItem.GetSprite();
+            DragDrop dragDrop = uiItemTransform.GetComponent<DragDrop>();
+            dragDrop.SetItem(weaponItem);
+            dragDrop.SetCanvas(canvas);
+            dragDrop.SetMyParent(weaponSlot.transform.Find(UiTags.BACKGROUND).transform);
         }
         Item useItem = playerEquipment.GetUseItem1();
         if (useItem != null)
@@ -70,6 +84,10 @@ public class UI_Equipment : MonoBehaviour
             uiItemTransform.gameObject.SetActive(true);
             Image image = uiItemTransform.GetComponent<Image>();
             image.sprite = useItem.GetSprite();
+            DragDrop dragDrop = uiItemTransform.GetComponent<DragDrop>();
+            dragDrop.SetItem(useItem);
+            dragDrop.SetCanvas(canvas);
+            dragDrop.SetMyParent(useSlot1.transform.Find(UiTags.BACKGROUND).transform);
             Text textAmount = useSlot1.transform.Find(UiTags.TEXT).GetComponent<Text>();
             if (useItem.amount > 1)
             {

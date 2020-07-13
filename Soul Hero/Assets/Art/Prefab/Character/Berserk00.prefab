@@ -53,6 +53,8 @@ GameObject:
   - component: {fileID: 7442641875227740072}
   - component: {fileID: 7442641875227740087}
   - component: {fileID: 5549074229313396771}
+  - component: {fileID: 8572145592593358190}
+  - component: {fileID: 8137910215096080039}
   m_Layer: 2
   m_Name: Berserk00
   m_TagString: Player
@@ -255,6 +257,31 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8572145592593358190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320119053300479189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b4982d64b12da246b5c0d63867b5839, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponPlayerSlot: {fileID: 5604150593971657605}
+--- !u!114 &8137910215096080039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4320119053300479189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2399e59fbbd45fc46b76e6982f074441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4772493411582318234
 GameObject:
   m_ObjectHideFlags: 0

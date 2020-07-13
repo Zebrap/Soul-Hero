@@ -21,7 +21,8 @@ public class Inventory
             itemArrayInventory[i] = new InventorySlot(i);
         }
         AddItem(new Item(Item.ItemType.HealthPotion,10));
-        for(int i=0; i<5; i++)
+        AddItem(new Item(Item.ItemType.BaseSword));
+        for (int i=0; i<2; i++)
         {
             AddItem(new Item(Item.ItemType.DarkSword));
         }
@@ -98,10 +99,12 @@ public class Inventory
 
     public void RemoveItem_SaveStack(Item item)
     {
-
-        GetInventorySlotWithItem(item).RemoveItem();
-        itemList.Remove(item);
-        OnITemListChange?.Invoke(this, EventArgs.Empty);
+        if (itemList.Contains(item))
+        {
+            GetInventorySlotWithItem(item).RemoveItem();
+            itemList.Remove(item);
+            OnITemListChange?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public void AddItem(Item item, InventorySlot inventorySlot)
