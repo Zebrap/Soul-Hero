@@ -96,11 +96,17 @@ public class Inventory
         OnITemListChange?.Invoke(this, EventArgs.Empty);
     }
 
+    public void RemoveItem_SaveStack(Item item)
+    {
+
+        GetInventorySlotWithItem(item).RemoveItem();
+        itemList.Remove(item);
+        OnITemListChange?.Invoke(this, EventArgs.Empty);
+    }
+
     public void AddItem(Item item, InventorySlot inventorySlot)
     {
-        int am = item.amount;
-        RemoveItem(item);
-        item.amount = am;
+        RemoveItem_SaveStack(item);
 
         itemList.Add(item);
         inventorySlot.SetItem(item);

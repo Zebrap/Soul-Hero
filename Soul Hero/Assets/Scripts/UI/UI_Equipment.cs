@@ -70,6 +70,15 @@ public class UI_Equipment : MonoBehaviour
             uiItemTransform.gameObject.SetActive(true);
             Image image = uiItemTransform.GetComponent<Image>();
             image.sprite = useItem.GetSprite();
+            Text textAmount = useSlot1.transform.Find(UiTags.TEXT).GetComponent<Text>();
+            if (useItem.amount > 1)
+            {
+                textAmount.text = useItem.amount.ToString();
+            }
+            else
+            {
+                textAmount.text = "";
+            }
         }
     }
 }

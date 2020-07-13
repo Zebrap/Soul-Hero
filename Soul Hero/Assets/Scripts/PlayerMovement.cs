@@ -24,8 +24,6 @@ public class PlayerMovement : MoveControl
 
     public float reachedDestinationTime = 0.8f;
     public LayerMask IgnoreMe;
-    [HideInInspector]
-    public Inventory inventory;
 
     private HealthScript healthScript;
 
@@ -42,8 +40,6 @@ public class PlayerMovement : MoveControl
         navAgent.avoidancePriority = 0;
         canMove = true;
 
-        inventory = new Inventory(UseItem, 20);
-        inventory.AddItem(new Item(Item.ItemType.BaseSword, 1));
     }
 
     private void Update()
@@ -128,26 +124,4 @@ public class PlayerMovement : MoveControl
         navAgent.speed += speed;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        ItemWorld itemWorld = other.GetComponent<ItemWorld>();
-        if (itemWorld != null)
-        {
-            if (inventory.AddItem(itemWorld.GetItem()))
-            {
-                itemWorld.DestroySelf();
-            }
-        }
-    }
-
-    private void UseItem(Item item)
-    {
-        switch (item.itemType)
-        {
-            case Item.ItemType.HealthPotion:
-                healthScript.HealthRegeneration(30);
-                inventory.RemoveItem(new Item(Item.ItemType.HealthPotion, 1));
-                break;
-        }
-    }
 }
