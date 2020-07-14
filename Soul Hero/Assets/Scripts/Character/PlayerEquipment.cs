@@ -7,6 +7,7 @@ public class PlayerEquipment : MonoBehaviour
 {
     public event EventHandler OnEquipmentChanged;
     public event EventHandler OnWeaponChange;
+    public event EventHandler OnUseHeal;
     [HideInInspector]
     public Inventory inventory;
 
@@ -29,6 +30,7 @@ public class PlayerEquipment : MonoBehaviour
     {
 
         inventory = new Inventory(UseItem, 20);
+        SetWeaponItem(new Item(Item.ItemType.BaseSword));
     }
 
     public Item GetWeaponItem()
@@ -106,6 +108,17 @@ public class PlayerEquipment : MonoBehaviour
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    private void UnequipSlot1()
+    {
+        this.useItem1 = null;
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+    private void UnequipSlot2()
+    {
+        this.useItem2 = null;
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     public void TryEquipItem(EquipSlot equipSlot, Item item)
     {
         if (equipSlot == item.GetEquipSlot())
@@ -149,5 +162,41 @@ public class PlayerEquipment : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && GetUseItem1() != null)
+        {
+            UseItemFromSlot(GetUseItem1(), EquipSlot.UseItem1);
+        }
+    }
+
+    private void UseItemFromSlot(Item item, EquipSlot slot)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.HealthPotion:
+                OnUseHeal?.Invoke(this, EventArgs.Empty);
+                break;
+        }
+        RemoveItem(item, slot);
+        OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void RemoveItem(Item item, EquipSlot slot)
+    {
+        item.amount -= 1;
+        if (item.amount <= 0)
+        {
+            switch (slot)
+            {
+                case EquipSlot.UseItem1:
+                    this.useItem1 = null;
+                    break;
+                case EquipSlot.UseItem2:
+                    this.useItem2 = null;
+                    break;
+            }
+        }
+    }
 }
 

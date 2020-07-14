@@ -98,5 +98,12 @@ public class UI_Equipment : MonoBehaviour
                 textAmount.text = "";
             }
         }
+        else
+        {
+            foreach (Transform child in useSlot1.transform.Find(UiTags.BACKGROUND).transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
     }
 }

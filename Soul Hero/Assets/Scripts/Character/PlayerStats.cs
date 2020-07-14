@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public event EventHandler OnEquipmentWeapon;
-
     public float maxHealth;
     public float maxMana;
     public int base_attack_damage;
@@ -33,12 +31,18 @@ public class PlayerStats : MonoBehaviour
         healthScript.healthMax = maxHealth;
         manaScript.manaMax = maxMana;
         playerEquipment.OnWeaponChange += WeaponChange;
+        playerEquipment.OnUseHeal += UseHeal;
         Calculate_Damage();
     }
 
     private void WeaponChange(object sender, System.EventArgs e)
     {
         Calculate_Damage();
+    }
+
+    private void UseHeal(object sender, System.EventArgs e)
+    {
+        healthScript.HealthRegeneration(20);
     }
 
     private void Calculate_Damage()
