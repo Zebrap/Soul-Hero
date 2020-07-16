@@ -17,8 +17,7 @@ public class PlayerEquipment : MonoBehaviour
     public enum EquipSlot
     {
         Weapon,
-        UseItem1,
-        UseItem2,
+        UseItem,
     }
 
 
@@ -97,6 +96,20 @@ public class PlayerEquipment : MonoBehaviour
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    private void SetUseItem(Item useItem, int slot)
+    {
+        switch (slot)
+        {
+            case 0:
+                SetUseItem1(useItem);
+                break;
+            case 1:
+                SetUseItem2(useItem);
+                break;
+        }
+    }
+
+
     public WeaponStats GetWeaponStats()
     {
         return weaponStats;
@@ -125,14 +138,35 @@ public class PlayerEquipment : MonoBehaviour
         {
             switch (equipSlot)
             {
-                default:
                 case EquipSlot.Weapon:
                     SetWeaponItem(item);
                     inventory.RemoveItem_SaveStack(item);
                     break;
-                case EquipSlot.UseItem1:
+                case EquipSlot.UseItem:
                     SetUseItem1(item);
                     inventory.RemoveItem_SaveStack(item);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void TryEquipItem(EquipSlot equipSlot, Item item, int slot)
+    {
+        if (equipSlot == item.GetEquipSlot())
+        {
+            switch (equipSlot)
+            {
+                case EquipSlot.Weapon:
+                    SetWeaponItem(item);
+                    inventory.RemoveItem_SaveStack(item);
+                    break;
+                case EquipSlot.UseItem:
+                    SetUseItem(item, slot);
+                    inventory.RemoveItem_SaveStack(item);
+                    break;
+                default:
                     break;
             }
         }
@@ -151,7 +185,6 @@ public class PlayerEquipment : MonoBehaviour
         }
     }
 
-
     private void UseItem(Item item)
     {
         switch (item.itemType)
@@ -166,11 +199,11 @@ public class PlayerEquipment : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && GetUseItem1() != null)
         {
-            UseItemFromSlot(GetUseItem1(), EquipSlot.UseItem1);
+            UseItemFromSlot(GetUseItem1(), 0);
         }
     }
 
-    private void UseItemFromSlot(Item item, EquipSlot slot)
+    private void UseItemFromSlot(Item item, int slot)
     {
         switch (item.itemType)
         {
@@ -182,17 +215,17 @@ public class PlayerEquipment : MonoBehaviour
         OnEquipmentChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public void RemoveItem(Item item, EquipSlot slot)
+    public void RemoveItem(Item item, int slot)
     {
         item.amount -= 1;
         if (item.amount <= 0)
         {
             switch (slot)
             {
-                case EquipSlot.UseItem1:
+                case 0:
                     this.useItem1 = null;
                     break;
-                case EquipSlot.UseItem2:
+                case 1:
                     this.useItem2 = null;
                     break;
             }

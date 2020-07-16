@@ -55,7 +55,7 @@ public class Item
         {
             default:
             case ItemType.HealthPotion:
-                return PlayerEquipment.EquipSlot.UseItem1;
+                return PlayerEquipment.EquipSlot.UseItem;
             case ItemType.DarkSword:
             case ItemType.BaseSword:
                 return PlayerEquipment.EquipSlot.Weapon;

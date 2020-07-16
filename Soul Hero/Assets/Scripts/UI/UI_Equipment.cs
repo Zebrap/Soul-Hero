@@ -14,7 +14,7 @@ public class UI_Equipment : MonoBehaviour
     private Transform itemContainer;
     private EquipmentSlot weaponSlot;
     private EquipmentSlot useSlot1;
-  //  private EquipmentSlot useSlot2;
+    private EquipmentSlot useSlot2;
 
     private PlayerEquipment playerEquipment;
 
@@ -23,11 +23,11 @@ public class UI_Equipment : MonoBehaviour
         itemContainer = transform.Find(UiTags.ITEM_SLOT_CONTAINER);
         weaponSlot = transform.Find("weaponSlot").GetComponent<EquipmentSlot>();
         useSlot1 = transform.Find("useSlot1").GetComponent<EquipmentSlot>();
-      //  useSlot2 = transform.Find("useSlot2").GetComponent<EquipmentSlot>();
+        useSlot2 = transform.Find("useSlot2").GetComponent<EquipmentSlot>();
 
         weaponSlot.OnItemDropped += WeaponSlot_OnItemDropped;
         useSlot1.OnItemDropped += UseSlot1_OnItemDropped;
-    //    useSlot1.OnItemDropped += UseSlot2_OnItemDropped;
+        useSlot2.OnItemDropped += UseSlot2_OnItemDropped;
     }
 
     private void Start()
@@ -36,15 +36,15 @@ public class UI_Equipment : MonoBehaviour
         UpdateVisual();
         playerEquipment.OnEquipmentChanged += CharacterEquipment_OnEquipmentChanged;
     }
-    /*
+    
     private void UseSlot2_OnItemDropped(object sender, EquipmentSlot.OnItemDroppedEventArgs e)
     {
-        playerEquipment.TryEquipItem(PlayerEquipment.EquipSlot.UseItem2, e.item);
-    }*/
+        playerEquipment.TryEquipItem(PlayerEquipment.EquipSlot.UseItem, e.item, 1);
+    }
 
     private void UseSlot1_OnItemDropped(object sender, EquipmentSlot.OnItemDroppedEventArgs e)
     {
-        playerEquipment.TryEquipItem(PlayerEquipment.EquipSlot.UseItem1, e.item);
+        playerEquipment.TryEquipItem(PlayerEquipment.EquipSlot.UseItem, e.item, 0);
     }
 
     private void WeaponSlot_OnItemDropped(object sender, EquipmentSlot.OnItemDroppedEventArgs e)
@@ -77,21 +77,21 @@ public class UI_Equipment : MonoBehaviour
             dragDrop.SetCanvas(canvas);
             dragDrop.SetMyParent(weaponSlot.transform.Find(UiTags.BACKGROUND).transform);
         }
-        Item useItem = playerEquipment.GetUseItem1();
-        if (useItem != null)
+        Item useItem1 = playerEquipment.GetUseItem1();
+        if (useItem1 != null)
         {
             Transform uiItemTransform = Instantiate(pfInventoryItem, useSlot1.transform.Find(UiTags.BACKGROUND));
             uiItemTransform.gameObject.SetActive(true);
             Image image = uiItemTransform.GetComponent<Image>();
-            image.sprite = useItem.GetSprite();
+            image.sprite = useItem1.GetSprite();
             DragDrop dragDrop = uiItemTransform.GetComponent<DragDrop>();
-            dragDrop.SetItem(useItem);
+            dragDrop.SetItem(useItem1);
             dragDrop.SetCanvas(canvas);
             dragDrop.SetMyParent(useSlot1.transform.Find(UiTags.BACKGROUND).transform);
             Text textAmount = useSlot1.transform.Find(UiTags.TEXT).GetComponent<Text>();
-            if (useItem.amount > 1)
+            if (useItem1.amount > 1)
             {
-                textAmount.text = useItem.amount.ToString();
+                textAmount.text = useItem1.amount.ToString();
             }
             else
             {
@@ -101,6 +101,34 @@ public class UI_Equipment : MonoBehaviour
         else
         {
             foreach (Transform child in useSlot1.transform.Find(UiTags.BACKGROUND).transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
+        Item useItem2 = playerEquipment.GetUseItem2();
+        if (useItem2 != null)
+        {
+            Transform uiItemTransform = Instantiate(pfInventoryItem, useSlot2.transform.Find(UiTags.BACKGROUND));
+            uiItemTransform.gameObject.SetActive(true);
+            Image image = uiItemTransform.GetComponent<Image>();
+            image.sprite = useItem2.GetSprite();
+            DragDrop dragDrop = uiItemTransform.GetComponent<DragDrop>();
+            dragDrop.SetItem(useItem2);
+            dragDrop.SetCanvas(canvas);
+            dragDrop.SetMyParent(useSlot2.transform.Find(UiTags.BACKGROUND).transform);
+            Text textAmount = useSlot2.transform.Find(UiTags.TEXT).GetComponent<Text>();
+            if (useItem2.amount > 1)
+            {
+                textAmount.text = useItem2.amount.ToString();
+            }
+            else
+            {
+                textAmount.text = "";
+            }
+        }
+        else
+        {
+            foreach (Transform child in useSlot2.transform.Find(UiTags.BACKGROUND).transform)
             {
                 GameObject.Destroy(child.gameObject);
             }
