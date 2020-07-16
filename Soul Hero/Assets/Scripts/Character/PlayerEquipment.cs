@@ -8,6 +8,7 @@ public class PlayerEquipment : MonoBehaviour
     public event EventHandler OnEquipmentChanged;
     public event EventHandler OnWeaponChange;
     public event EventHandler OnUseHeal;
+    public event EventHandler OnUseMana;
     [HideInInspector]
     public Inventory inventory;
 
@@ -201,6 +202,10 @@ public class PlayerEquipment : MonoBehaviour
         {
             UseItemFromSlot(GetUseItem1(), 0);
         }
+        if (Input.GetKeyDown(KeyCode.Alpha2) && GetUseItem2() != null)
+        {
+            UseItemFromSlot(GetUseItem2(), 1);
+        }
     }
 
     private void UseItemFromSlot(Item item, int slot)
@@ -209,6 +214,9 @@ public class PlayerEquipment : MonoBehaviour
         {
             case Item.ItemType.HealthPotion:
                 OnUseHeal?.Invoke(this, EventArgs.Empty);
+                break;
+            case Item.ItemType.ManaPotion:
+                OnUseMana?.Invoke(this, EventArgs.Empty);
                 break;
         }
         RemoveItem(item, slot);

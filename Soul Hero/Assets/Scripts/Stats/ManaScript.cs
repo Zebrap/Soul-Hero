@@ -63,7 +63,7 @@ public class ManaScript : MonoBehaviour
     public void ManaRegeneration(int regeneration)
     {
         mana = Mathf.Clamp(mana + regeneration, 0, (int)manaMax);
-        manaFill.fillAmount = mana / 100f;
+        manaFill.fillAmount = mana / manaMax;
         manaText.text = mana + " / " + manaMax;
     }
 }

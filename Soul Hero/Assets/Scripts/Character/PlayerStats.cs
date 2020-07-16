@@ -32,6 +32,7 @@ public class PlayerStats : MonoBehaviour
         manaScript.manaMax = maxMana;
         playerEquipment.OnWeaponChange += WeaponChange;
         playerEquipment.OnUseHeal += UseHeal;
+        playerEquipment.OnUseMana += UseMana;
         Calculate_Damage();
     }
 
@@ -43,6 +44,11 @@ public class PlayerStats : MonoBehaviour
     private void UseHeal(object sender, System.EventArgs e)
     {
         healthScript.HealthRegeneration(20);
+    }
+
+    private void UseMana(object sender, System.EventArgs e)
+    {
+        manaScript.ManaRegeneration(20);
     }
 
     private void Calculate_Damage()

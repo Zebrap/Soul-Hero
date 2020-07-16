@@ -10,7 +10,8 @@ public class Item
     {
         BaseSword,
         DarkSword,
-        HealthPotion
+        HealthPotion,
+        ManaPotion
     }
 
     public ItemType itemType;
@@ -43,6 +44,7 @@ public class Item
             case ItemType.BaseSword:
             case ItemType.DarkSword:
                 return false;
+            case ItemType.ManaPotion:
             case ItemType.HealthPotion:
                 return true;
         }
@@ -54,6 +56,7 @@ public class Item
         switch (itemType)
         {
             default:
+            case ItemType.ManaPotion:
             case ItemType.HealthPotion:
                 return PlayerEquipment.EquipSlot.UseItem;
             case ItemType.DarkSword:
