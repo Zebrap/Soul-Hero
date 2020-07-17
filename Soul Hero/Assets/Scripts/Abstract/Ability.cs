@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 abstract public class Ability : MonoBehaviour, IAbility
 {
@@ -21,6 +22,11 @@ abstract public class Ability : MonoBehaviour, IAbility
 
     public int manaCost = 20;
 
+    public float effect_duration;
+
+    [TextArea]
+    public string description = "";
+
     void Awake()
     {
         dealDamage = false;
@@ -28,6 +34,16 @@ abstract public class Ability : MonoBehaviour, IAbility
         collidersList = new List<Collider>();
         particleEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
         gameObject.SetActive(false);
+        ReplaceDescription();
+    }
+
+    private void ReplaceDescription()
+    {
+        description = description.Replace("<SpellDamage>", spellDamage.ToString());
+        description = description.Replace("<Cooldown>", ActiveTime().ToString());
+        description = description.Replace("<TimeCast>", TimeCast().ToString());
+        description = description.Replace("<EffectDuration>", effect_duration.ToString());
+        description = description.Replace("<ManaCost>", manaCost.ToString());
     }
 
     private void Update()
@@ -95,6 +111,11 @@ abstract public class Ability : MonoBehaviour, IAbility
     public float ActiveTime()
     {
         return timeStartCollider + timeEndCollider + timeDeactive;
+    }
+
+    public string GetDescription()
+    {
+        return description;
     }
 
     protected abstract void MoveAblity();

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
+public class DragDrop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
 {
     #pragma warning disable 0649
     [SerializeField]
@@ -82,4 +82,13 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         }
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        // Show item stats
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        // Hide item stats
+    }
 }

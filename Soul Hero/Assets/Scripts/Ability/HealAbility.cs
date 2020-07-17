@@ -6,7 +6,6 @@ public class HealAbility : Ability
 {
     private GameObject target;
     private HealthScript healthTarget;
-    public float healTime = 4f;
     public float healInterval = 0.2f;
 
     protected override void EffectOnTarget()
@@ -29,9 +28,9 @@ public class HealAbility : Ability
 
     IEnumerator HealOverTime()
     {
-        for (float i = 0; i < healTime/healInterval; i++) // Time/inteval = numbersOfHeal
+        for (float i = 0; i < effect_duration / healInterval; i++) // Time/inteval = numbersOfHeal
         {
-            healthTarget.HealthRegeneration(spellDamage/(int)(healTime / healInterval)); // maxHeal = (spellDamage/(healTime / healInterval))*(healTime / healInterval) = spellDamage
+            healthTarget.HealthRegeneration(spellDamage/(int)(effect_duration / healInterval)); // maxHeal = (spellDamage/(healTime / healInterval))*(healTime / healInterval) = spellDamage
             yield return new WaitForSeconds(healInterval);
         }
     }

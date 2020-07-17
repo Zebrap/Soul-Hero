@@ -43,7 +43,7 @@ public class PlayerMovement : MoveControl
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (!GUI_Script.ClickGUI())
+            if (!GUI_Script.IsMauseOverUi())
             {
                 ClickMove();
             }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class BuffAbility : Ability
 {
     private PlayerMovement playerAttack;
-    public float timeBuff;
 
     protected override void EffectOnTarget()
     {
@@ -27,7 +26,7 @@ public class BuffAbility : Ability
 
     IEnumerator EndBuff()
     {
-        yield return new WaitForSeconds(timeBuff);
+        yield return new WaitForSeconds(effect_duration);
         playerAttack.attack_damage -= spellDamage;
     }
 }

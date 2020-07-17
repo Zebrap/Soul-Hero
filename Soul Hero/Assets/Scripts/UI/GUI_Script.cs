@@ -79,4 +79,9 @@ public class GUI_Script : MonoBehaviour
         }
     }
 
+
+    public bool IsMauseOverUi()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
 }

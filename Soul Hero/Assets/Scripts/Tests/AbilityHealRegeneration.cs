@@ -22,7 +22,7 @@ namespace Tests
 
             healAbility.spellDamage = 40;
             healAbility.UseAbility(player);
-            float time = healAbility.healTime / healAbility.healInterval;
+            float time = healAbility.effect_duration / healAbility.healInterval;
             wait(time, healthScript);
         }
 

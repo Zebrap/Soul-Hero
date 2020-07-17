@@ -9,6 +9,7 @@ public class SkillTree : MonoBehaviour
     public GameObject[] skill;
     private SkillManager skillManager;
     public Color unLockColor;
+    public Transform uiDescription;
 
     private List<SkillButton> skillButtonList;
 
@@ -29,6 +30,9 @@ public class SkillTree : MonoBehaviour
         foreach (Ability ability in abilities.abilities)
         {
             skill[id].transform.Find("Skill_Image").GetComponent<Image>().sprite = ability.GetComponent<Image>().sprite;
+            skill[id].transform.Find("Skill_Image").GetComponent<Image>().color = ability.GetComponent<Image>().color;
+            skill[id].transform.GetComponent<AbilityDescription>().description = ability.GetDescription();
+            skill[id].transform.GetComponent<AbilityDescription>().SetUI(uiDescription);
             id++;
         }
     }
