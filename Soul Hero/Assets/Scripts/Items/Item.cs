@@ -11,7 +11,8 @@ public class Item
         BaseSword,
         DarkSword,
         HealthPotion,
-        ManaPotion
+        ManaPotion,
+        HeavyBlade
     }
 
     public ItemType itemType;
@@ -43,6 +44,7 @@ public class Item
             default:
             case ItemType.BaseSword:
             case ItemType.DarkSword:
+            case ItemType.HeavyBlade:
                 return false;
             case ItemType.ManaPotion:
             case ItemType.HealthPotion:
@@ -61,6 +63,7 @@ public class Item
                 return PlayerEquipment.EquipSlot.UseItem;
             case ItemType.DarkSword:
             case ItemType.BaseSword:
+            case ItemType.HeavyBlade:
                 return PlayerEquipment.EquipSlot.Weapon;
         }
     }
