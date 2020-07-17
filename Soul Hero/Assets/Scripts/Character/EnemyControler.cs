@@ -88,4 +88,5 @@ public class EnemyControler : MoveControl
     {
         navAgent.enabled = false;
     }
+
 }

@@ -83,4 +83,9 @@ public class SkillTree : MonoBehaviour
             unLock.color = unLockColor;
         }
     }
+    void OnDisable()
+    {
+        uiDescription.gameObject.SetActive(false);
+    }
+
 }

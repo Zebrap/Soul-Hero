@@ -46,8 +46,9 @@ GameObject:
   - component: {fileID: 1689954532968539671}
   - component: {fileID: 318323589608743455}
   - component: {fileID: 8930028042712016308}
+  - component: {fileID: 5647959981813859220}
   m_Layer: 0
-  m_Name: EnemyNoModel
+  m_Name: EnemyCustom
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,8 +116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874c7133bdfb7bf4d9422b8c7b6c3d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthMax: 100
-  health: 100
   isDead: 0
   healthUI: {fileID: 8930028043396684515}
   healthFill: {fileID: 8930028043437351289}
@@ -216,6 +215,22 @@ MonoBehaviour:
     amount: 0
   - itemType: 0
     amount: 0
+  chanceToDrop: 0.5
+--- !u!114 &5647959981813859220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462402938975269510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d33b4ffe316cb44a60b7f016c692c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 0}
+  cursorMode: 0
+  hotSpot: {x: 58, y: 8}
 --- !u!1 &8930028042765867115
 GameObject:
   m_ObjectHideFlags: 0
