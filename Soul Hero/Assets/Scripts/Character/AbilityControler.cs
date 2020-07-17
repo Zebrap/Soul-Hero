@@ -52,6 +52,7 @@ public class AbilityControler : MonoBehaviour
             timerSkill[cdNumber] = 0;
             timeCooldown[cdNumber] = ability.ActiveTime();
             SkillBackGround[cdNumber].GetComponent<Image>().sprite = ability.GetComponent<Image>().sprite;
+            SkillBackGround[cdNumber].GetComponent<Image>().color = ability.GetComponent<Image>().color;
             cdNumber++;
         }
 

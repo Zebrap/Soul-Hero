@@ -72,32 +72,32 @@ public class Item
         }
     }
 
-    private void SetPower()
+    public void SetPower()
     {
         switch (itemType)
         {
             default:
             case ItemType.ManaPotion:
                 power = 20;
-                description = "Heal Potion: Recovers " + power+ " mana";
+                description = "Mana Potion" + Environment.NewLine+"Recovers " + power+ " mana";
                 break;
             case ItemType.HealthPotion:
                 power = 20;
-                description = "Mana Potion: Recovers " + power + " life";
+                description = "Health Potion" + Environment.NewLine + "Recovers " + power + " life";
                 break;
             case ItemType.DarkSword:
                 power = 40;
-                description = "Dark Sword: ";
+                description = "Dark Sword"+ Environment.NewLine;
                 WeaponDescription();
                 break;
             case ItemType.BaseSword:
                 power = 10;
-                description = "Base Sword: ";
+                description = "Base Sword" + Environment.NewLine;
                 WeaponDescription();
                 break;
             case ItemType.HeavyBlade:
                 power = 70;
-                description = "Heavy Blade: ";
+                description = "Heavy Blade" + Environment.NewLine;
                 WeaponDescription();
                 break;
         }
