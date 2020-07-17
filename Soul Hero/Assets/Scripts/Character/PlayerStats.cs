@@ -41,21 +41,21 @@ public class PlayerStats : MonoBehaviour
         Calculate_Damage();
     }
 
-    private void UseHeal(object sender, System.EventArgs e)
+    private void UseHeal(object sender, ParamterEventArgs e)
     {
-        healthScript.HealthRegeneration(20);
+        healthScript.HealthRegeneration(e.item.GetPower());
     }
 
-    private void UseMana(object sender, System.EventArgs e)
+    private void UseMana(object sender, ParamterEventArgs e)
     {
-        manaScript.ManaRegeneration(20);
+        manaScript.ManaRegeneration(e.item.GetPower());
     }
 
     private void Calculate_Damage()
     {
         if (playerEquipment.GetWeaponItem() != null)
         {
-            attack_damage_with_weapon = base_attack_damage + playerEquipment.GetWeaponStats().attackDamage;
+            attack_damage_with_weapon = base_attack_damage + playerEquipment.GetWeaponItem().GetPower();
         }
         else
         {

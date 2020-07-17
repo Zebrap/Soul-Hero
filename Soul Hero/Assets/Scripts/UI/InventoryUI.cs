@@ -12,6 +12,9 @@ public class InventoryUI : MonoBehaviour
     #pragma warning disable 0649
     [SerializeField]
     private Canvas canvas;
+    #pragma warning disable 0649
+    [SerializeField]
+    private Transform descriptionInventoryUI;
 
     private Inventory inventory;
     private Transform ItemSlotContainer;
@@ -59,6 +62,7 @@ public class InventoryUI : MonoBehaviour
                 image.sprite = item.GetSprite();
                 DragDrop dragDrop = uiItem.GetComponent<DragDrop>();
                 dragDrop.SetItem(item);
+                dragDrop.SetDescriptionUI(descriptionInventoryUI);
                 dragDrop.SetCanvas(canvas);
                 dragDrop.SetMyParent(itemSlotReactTransform.Find(UiTags.BACKGROUND).transform);
                 Text textAmount = itemSlotReactTransform.Find(UiTags.TEXT).GetComponent<Text>();
@@ -118,5 +122,10 @@ public class InventoryUI : MonoBehaviour
         {
             print("middle click");
         });*/
+    }
+
+    void OnDisable()
+    {
+        descriptionInventoryUI.gameObject.SetActive(false);
     }
 }

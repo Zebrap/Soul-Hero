@@ -3,17 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ParamterEventArgs : EventArgs
+{
+    public Item item { get; set; }
+}
+
 public class PlayerEquipment : MonoBehaviour
 {
     public event EventHandler OnEquipmentChanged;
     public event EventHandler OnWeaponChange;
-    public event EventHandler OnUseHeal;
-    public event EventHandler OnUseMana;
+    public event EventHandler<ParamterEventArgs> OnUseHeal;
+    public event EventHandler<ParamterEventArgs> OnUseMana;
     [HideInInspector]
     public Inventory inventory;
 
     public Transform WeaponPlayerSlot;
-    private WeaponStats weaponStats;
+  //  private WeaponStats weaponStats;
 
     public enum EquipSlot
     {
@@ -66,7 +71,7 @@ public class PlayerEquipment : MonoBehaviour
         }
         string path = "items/" + this.weaponItem.itemType;
         GameObject instance = Instantiate(Resources.Load(path, typeof(GameObject))) as GameObject;
-        weaponStats = instance.GetComponent<WeaponStats>();
+      //  weaponStats = instance.GetComponent<WeaponStats>();
         Vector3 pos = instance.transform.position;
         Quaternion rot = instance.transform.rotation;
         instance.transform.SetParent(WeaponPlayerSlot);
@@ -110,12 +115,12 @@ public class PlayerEquipment : MonoBehaviour
         }
     }
 
-
+/*
     public WeaponStats GetWeaponStats()
     {
-        return weaponStats;
+       return weaponStats;
     }
-
+    */
     private void UnequipWeapon()
     {
         this.weaponItem = null;
@@ -210,13 +215,15 @@ public class PlayerEquipment : MonoBehaviour
 
     private void UseItemFromSlot(Item item, int slot)
     {
+        ParamterEventArgs args = new ParamterEventArgs();
+        args.item = item;
         switch (item.itemType)
         {
             case Item.ItemType.HealthPotion:
-                OnUseHeal?.Invoke(this, EventArgs.Empty);
+                OnUseHeal?.Invoke(this, args);
                 break;
             case Item.ItemType.ManaPotion:
-                OnUseMana?.Invoke(this, EventArgs.Empty);
+                OnUseMana?.Invoke(this, args);
                 break;
         }
         RemoveItem(item, slot);

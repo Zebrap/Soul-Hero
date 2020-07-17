@@ -17,17 +17,21 @@ public class Item
 
     public ItemType itemType;
     public int amount;
+    private int power;
+    private string description ="";
 
     public Item(ItemType type, int amount)
     {
         this.itemType = type;
         this.amount = amount;
+        SetPower();
     }
 
     public Item(ItemType type)
     {
         this.itemType = type;
         this.amount = 1;
+        SetPower();
     }
 
     public Sprite GetSprite()
@@ -66,5 +70,51 @@ public class Item
             case ItemType.HeavyBlade:
                 return PlayerEquipment.EquipSlot.Weapon;
         }
+    }
+
+    private void SetPower()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.ManaPotion:
+                power = 20;
+                description = "Heal Potion: Recovers " + power+ " mana";
+                break;
+            case ItemType.HealthPotion:
+                power = 20;
+                description = "Mana Potion: Recovers " + power + " life";
+                break;
+            case ItemType.DarkSword:
+                power = 40;
+                description = "Dark Sword: ";
+                WeaponDescription();
+                break;
+            case ItemType.BaseSword:
+                power = 10;
+                description = "Base Sword: ";
+                WeaponDescription();
+                break;
+            case ItemType.HeavyBlade:
+                power = 70;
+                description = "Heavy Blade: ";
+                WeaponDescription();
+                break;
+        }
+    }
+
+    public int GetPower()
+    {
+        return power;
+    }
+
+    private void WeaponDescription()
+    {
+        description += "Attack power: " + power;
+    }
+
+    public string GetDescription()
+    {
+        return description;
     }
 }

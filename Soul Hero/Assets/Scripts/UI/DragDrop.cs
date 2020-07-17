@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class DragDrop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IDropHandler
@@ -14,7 +15,7 @@ public class DragDrop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Item item;
     private Vector2 startPose;
     private Transform myParent;
-
+    private Transform descriptionUI;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -84,11 +85,17 @@ public class DragDrop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Show item stats
+        descriptionUI.gameObject.SetActive(true);
+        descriptionUI.Find(UiTags.TEXT).GetComponent<Text>().text = item.GetDescription();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // Hide item stats
+        descriptionUI.gameObject.SetActive(false);
+    }
+
+    public void SetDescriptionUI(Transform ui)
+    {
+        descriptionUI = ui;
     }
 }
