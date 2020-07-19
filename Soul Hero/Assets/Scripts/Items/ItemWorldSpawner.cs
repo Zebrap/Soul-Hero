@@ -25,7 +25,8 @@ public class ItemWorldSpawner : MonoBehaviour
             {
                 int r = UnityEngine.Random.Range(0, item.Length - 1);
                 item[r].SetPower();
-                ItemWorld.SpawnItemWorld(new Vector3(transform.position.x, transform.position.y + yPoxSpawn, transform.position.z), item[r]);
+                Item dropItem = new Item(item[r].itemType, item[r].amount);
+                ItemWorld.SpawnItemWorld(new Vector3(transform.position.x, transform.position.y + yPoxSpawn, transform.position.z), dropItem);
             }
         }
     }
