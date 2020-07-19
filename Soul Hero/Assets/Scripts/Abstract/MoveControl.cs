@@ -24,6 +24,7 @@ abstract public class MoveControl : MonoBehaviour
     protected float attack_Timer;
 
     public int attack_damage = 10;
+    public int bonus_attack_damage = 0;
 
     [HideInInspector]
     public bool canMove;
@@ -71,7 +72,7 @@ abstract public class MoveControl : MonoBehaviour
                 return;
             }
 
-            target.GetComponent<HealthScript>().ApplyDamage(attack_damage);
+            target.GetComponent<HealthScript>().ApplyDamage(attack_damage+ bonus_attack_damage);
             characterAnimations.Attack3();
             attack_Timer = 0f;
         }

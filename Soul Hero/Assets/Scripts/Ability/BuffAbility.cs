@@ -5,10 +5,12 @@ using UnityEngine;
 public class BuffAbility : Ability
 {
     private PlayerMovement playerAttack;
+    private int spellPowerBuff; 
 
     protected override void EffectOnTarget()
     {
-        playerAttack.attack_damage += spellDamage;
+        playerAttack.bonus_attack_damage += spellDamage;
+        spellPowerBuff = spellDamage;
         StartCoroutine(EndBuff());
     }
 
@@ -27,6 +29,6 @@ public class BuffAbility : Ability
     IEnumerator EndBuff()
     {
         yield return new WaitForSeconds(effect_duration);
-        playerAttack.attack_damage -= spellDamage;
+        playerAttack.bonus_attack_damage -= spellPowerBuff;
     }
 }

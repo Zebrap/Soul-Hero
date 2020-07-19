@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    private bool alreadySpawned = false;
+   // private bool alreadySpawned = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == Tags.PLAYER_TAG)
