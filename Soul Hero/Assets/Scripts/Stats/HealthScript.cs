@@ -154,4 +154,21 @@ public class HealthScript : MonoBehaviour, IHealthScript
             healthFill.color = gradient.Evaluate(health / healthMax);
         }
     }
+
+    public void reviveEnemy()
+    {
+        health = (int)healthMax;
+        GetComponent<EnemyControler>().enabled = true;
+        GetComponent<NavMeshAgent>().enabled = true;
+        GetComponent<BoxCollider>().enabled = true;
+        GetComponent<NavMeshObstacle>().enabled = true;
+        healthUI.SetActive(true);
+        isDead = false;
+
+        if (healthFill != null)
+        {
+            healthFill.fillAmount = (health / healthMax);
+            healthFill.color = gradient.Evaluate(health / healthMax);
+        }
+    }
 }
