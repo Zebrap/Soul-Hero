@@ -14,14 +14,26 @@ public class TransparentBuildings : MonoBehaviour
         {
             materials.Add(material);
         }
+        foreach (Material material in materials)
+        {
+            material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+            material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+            material.SetInt("_ZWrite", 1);
+            material.DisableKeyword("_ALPHATEST_ON");
+            material.EnableKeyword("_ALPHABLEND_ON");
+            material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+            material.renderQueue = -1;
+            Color32 col = material.GetColor("_Color");
+            col.a = 255;
+            material.SetColor("_Color", col);
+        }
     }
 
     private void SetTransparent()
     {
         foreach(Material material in materials)
         {
-
-            material.SetFloat("_Mode", 2);
+          //  material.SetFloat("_Mode", 3);
             material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
             material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
             material.SetInt("_ZWrite", 0);
@@ -80,10 +92,10 @@ public class TransparentBuildings : MonoBehaviour
             foreach (Material material in materials)
             {
                 Color32 col = material.GetColor("_Color");
-                alpha = Mathf.Lerp(col.a, 80f, lerp);
+                alpha = Mathf.Lerp(col.a, 50f, lerp);
 
                 a = (byte)alpha;
-                lerp += Time.deltaTime * 0.1f;
+                lerp += Time.deltaTime * 0.05f;
                 col.a = a;
                 material.SetColor("_Color", col);
             }
