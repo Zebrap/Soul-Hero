@@ -497,7 +497,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   healthRegen: 0
   period: 1
-  experience: 15
+  experience: 3
 --- !u!65 &7826756427794886448
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -527,6 +527,7 @@ MonoBehaviour:
   attack_Distance: 1.5
   attack_Distance_OffSet: 0
   attack_damage: 1
+  bonus_attack_damage: 0
   canMove: 0
 --- !u!208 &9189380287599946553
 NavMeshObstacle:

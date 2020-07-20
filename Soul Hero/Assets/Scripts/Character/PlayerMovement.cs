@@ -67,7 +67,7 @@ public class PlayerMovement : MoveControl
             characterAnimations.Walk(false);
         }
 
-        if(playerState == PlayerState.ATTAK && !target.GetComponent<HealthScript>().isDead && canMove)
+        if (playerState == PlayerState.ATTAK && !target.GetComponent<HealthScript>().isDead && canMove)
         {
             if (Vector3.Distance(transform.position, target.transform.position) <= attack_Distance)
             {
@@ -75,6 +75,10 @@ public class PlayerMovement : MoveControl
                 return;
             }
             navAgent.destination = target.transform.position;
+        }
+        else
+        {
+            attack_Timer += Time.deltaTime;
         }
     }
 
