@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class CharacterAnimations : MonoBehaviour
 {
     private Animator[] animator;
     private int numberControllers;
+    private AnimatorStateInfo animationState;
+    private AnimatorClipInfo[] myAnimatorClip;
+    private float animationTime;
+    private float baseTime = 1f;
+    public bool showStats = false;
 
     void Awake()
     {
@@ -16,6 +22,9 @@ public class CharacterAnimations : MonoBehaviour
         {
             animator[i] = models.transform.GetChild(i).GetComponent<Animator>();
         }
+    }
+    private void Start()
+    {
     }
 
     public void Walk(bool walk)
@@ -35,12 +44,13 @@ public class CharacterAnimations : MonoBehaviour
     {
       //  animator.SetTrigger(AnimationsTags.ATTACK2);
     }
-
-    public void Attack3()
+    private float animationSpeed;
+    public void Attack3(float time)
     {
         for (int i = 0; i < numberControllers; i++)
         {
             animator[i].SetTrigger(AnimationsTags.ATTACK3);
+            ChangeAniamtionSpeed(time, animator[i]);
         }
     }
 
@@ -59,7 +69,21 @@ public class CharacterAnimations : MonoBehaviour
             for (int i = 0; i < numberControllers; i++)
             {
                 animator[i].SetTrigger(tag.ToString());
+                ResetAnimationSpeed(animator[i]);
             }
         }
+    }
+
+    private void ChangeAniamtionSpeed(float time, Animator anim )
+    {
+        myAnimatorClip = anim.GetCurrentAnimatorClipInfo(0);
+        animationTime = myAnimatorClip[0].clip.length;
+        animationSpeed = animationTime / time;
+        anim.SetFloat("AttackSpeed", animationSpeed);
+    }
+
+    private void ResetAnimationSpeed(Animator anim)
+    {
+        anim.speed = baseTime;
     }
 }

@@ -20,7 +20,7 @@ abstract public class MoveControl : MonoBehaviour
     public float attack_Distance = 1f;
     public float attack_Distance_OffSet = 1f;
 
-    protected float wait_Beffore_Attack_Time = 1.4f;
+    public float wait_Beffore_Attack_Time = 1.4f;
     protected float attack_Timer;
 
     public int attack_damage = 10;
@@ -73,7 +73,7 @@ abstract public class MoveControl : MonoBehaviour
             }
 
             target.GetComponent<HealthScript>().ApplyDamage(attack_damage+ bonus_attack_damage);
-            characterAnimations.Attack3();
+            characterAnimations.Attack3(wait_Beffore_Attack_Time);
             attack_Timer = 0f;
         }
     }
