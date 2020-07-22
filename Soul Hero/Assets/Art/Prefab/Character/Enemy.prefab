@@ -450,6 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864ec0f2ef8ed0742be4d3a49f3b3785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showStats: 0
 --- !u!114 &7826756427951605980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +527,7 @@ MonoBehaviour:
   roationDegreesPerSecond: 180
   attack_Distance: 1.5
   attack_Distance_OffSet: 0
+  wait_Beffore_Attack_Time: 1.4
   attack_damage: 1
   bonus_attack_damage: 0
   canMove: 0
@@ -12632,6 +12634,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049198871621356879}
   - component: {fileID: 5049198871621356878}
+  - component: {fileID: 5065266953226852800}
   m_Layer: 0
   m_Name: Berserker-lower00
   m_TagString: Untagged
@@ -12674,6 +12677,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5065266953226852800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5049198871621356876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb0e6656e0d6f545b316542d482f9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7826756427794886449}
 --- !u!1 &5049198871621421371
 GameObject:
   m_ObjectHideFlags: 0
@@ -16369,6 +16385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049198871897666272}
   - component: {fileID: 5049198871897666275}
+  - component: {fileID: 7342307060582516323}
   m_Layer: 0
   m_Name: Berserker-head00
   m_TagString: Untagged
@@ -16411,6 +16428,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7342307060582516323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5049198871897666273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb0e6656e0d6f545b316542d482f9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7826756427794886449}
 --- !u!1 &5049198871901851786
 GameObject:
   m_ObjectHideFlags: 0
@@ -18247,6 +18277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049198872066374456}
   - component: {fileID: 5049198872066374459}
+  - component: {fileID: 2165006904307847862}
   m_Layer: 0
   m_Name: Berserker-leg00
   m_TagString: Untagged
@@ -18289,6 +18320,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2165006904307847862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5049198872066374457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb0e6656e0d6f545b316542d482f9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7826756427794886449}
 --- !u!1 &5049198872066862624
 GameObject:
   m_ObjectHideFlags: 0
@@ -21161,6 +21205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049198872298047927}
   - component: {fileID: 5049198872298047926}
+  - component: {fileID: 7376973675090252269}
   m_Layer: 0
   m_Name: Berserker-shoulder00
   m_TagString: Untagged
@@ -21203,6 +21248,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7376973675090252269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5049198872298047924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb0e6656e0d6f545b316542d482f9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7826756427794886449}
 --- !u!1 &5049198872303054667
 GameObject:
   m_ObjectHideFlags: 0
@@ -21746,6 +21804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049198872342625114}
   - component: {fileID: 5049198872342625125}
+  - component: {fileID: 4352273440380377274}
   m_Layer: 0
   m_Name: Berserker-upper00
   m_TagString: Untagged
@@ -21788,6 +21847,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4352273440380377274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5049198872342625115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb0e6656e0d6f545b316542d482f9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7826756427794886449}
 --- !u!1 &5049198872343643072
 GameObject:
   m_ObjectHideFlags: 0
@@ -21895,6 +21967,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5049198872345793105}
   - component: {fileID: 5049198872345793104}
+  - component: {fileID: 5440492610006773768}
   m_Layer: 0
   m_Name: Berserker-arm00
   m_TagString: Untagged
@@ -21937,6 +22010,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5440492610006773768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5049198872345793110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bb0e6656e0d6f545b316542d482f9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 7826756427794886449}
 --- !u!1 &5049198872346055670
 GameObject:
   m_ObjectHideFlags: 0

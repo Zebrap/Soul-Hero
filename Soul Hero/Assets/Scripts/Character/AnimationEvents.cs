@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class AnimationEvents : MonoBehaviour
 {
-    public PlayerMovement player;
+    public MoveControl player;
+
+    public void Awake()
+    {
+        if (player == null)
+        {
+            player = transform.parent.gameObject.transform.parent.gameObject.GetComponent<MoveControl>(); // First parent Model, model parent
+        }
+    }
 
     public void FreezPlayerMove()
     {
@@ -16,5 +24,10 @@ public class AnimationEvents : MonoBehaviour
     {
    //     player.NavMeshAgent_is_Stop(false);
    //     player.canMove = true;
+    }
+
+    public void EndAttackAnimation()
+    {
+        player.dealDamage();
     }
 }

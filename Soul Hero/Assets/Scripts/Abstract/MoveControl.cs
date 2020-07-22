@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.UIElements;
 
 public enum CharacterState
 {
@@ -28,6 +28,8 @@ abstract public class MoveControl : MonoBehaviour
 
     [HideInInspector]
     public bool canMove;
+    private Transform attackedEnemy;
+    private bool dealAttackDamage;
 
     protected void AttackSingleTarget()
     {
@@ -71,10 +73,19 @@ abstract public class MoveControl : MonoBehaviour
                 }
                 return;
             }
-
-            target.GetComponent<HealthScript>().ApplyDamage(attack_damage+ bonus_attack_damage);
+            dealAttackDamage = true;
+            attackedEnemy = target.transform;
             characterAnimations.Attack3(wait_Beffore_Attack_Time);
             attack_Timer = 0f;
+        }
+    }
+
+    public void dealDamage()
+    {
+        if (dealAttackDamage)
+        {
+            dealAttackDamage = false;
+            attackedEnemy.GetComponent<HealthScript>().ApplyDamage(attack_damage + bonus_attack_damage);
         }
     }
 
