@@ -28,6 +28,7 @@ public class EnemyControler : MoveControl
         enamy_State = EnamyState.CHASE;
 
         attack_Timer = wait_Beffore_Attack_Time;
+        characterAnimations.SetAttackSpeed(wait_Beffore_Attack_Time);
     }
 
     void Update()

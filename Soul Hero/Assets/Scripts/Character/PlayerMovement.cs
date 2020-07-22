@@ -38,6 +38,10 @@ public class PlayerMovement : MoveControl
         canMove = true;
 
     }
+    private void Start()
+    {
+        characterAnimations.SetAttackSpeed(wait_Beffore_Attack_Time);
+    }
 
     private void Update()
     {

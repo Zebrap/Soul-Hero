@@ -20,7 +20,8 @@ abstract public class MoveControl : MonoBehaviour
     public float attack_Distance = 1f;
     public float attack_Distance_OffSet = 1f;
 
-    public float wait_Beffore_Attack_Time = 1.4f;
+    [SerializeField]
+    protected float wait_Beffore_Attack_Time;
     protected float attack_Timer;
 
     public int attack_damage = 10;
@@ -63,6 +64,7 @@ abstract public class MoveControl : MonoBehaviour
         attack_Timer += Time.deltaTime;
         if (attack_Timer > wait_Beffore_Attack_Time) // TODO change to animation time, animation event
         {
+            attack_Timer = 0f;
             if (Vector3.Distance(transform.position, target.transform.position) >=
                             attack_Distance + attack_Distance_OffSet)           //check distanace if want to attack
             {
@@ -76,7 +78,6 @@ abstract public class MoveControl : MonoBehaviour
             dealAttackDamage = true;
             attackedEnemy = target.transform;
             characterAnimations.Attack3(wait_Beffore_Attack_Time);
-            attack_Timer = 0f;
         }
     }
 
@@ -111,5 +112,12 @@ abstract public class MoveControl : MonoBehaviour
             canMove = true;
         }
         navAgent.isStopped = stop;
+    }
+
+    public void Set_wait_Beffore_Attack_Time(float value)
+    {
+        if (wait_Beffore_Attack_Time == value) return;
+        wait_Beffore_Attack_Time = value;
+        characterAnimations.SetAttackSpeed(wait_Beffore_Attack_Time);
     }
 }

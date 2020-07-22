@@ -23,8 +23,24 @@ public class CharacterAnimations : MonoBehaviour
             animator[i] = models.transform.GetChild(i).GetComponent<Animator>();
         }
     }
-    private void Start()
+
+    public void SetAttackSpeed(float time)
     {
+        RuntimeAnimatorController ac = animator[0].runtimeAnimatorController;
+        for (int i = 0; i < ac.animationClips.Length; i++)
+        {
+            if (ac.animationClips[i].name == "Berserker_attack_03")
+            {
+                myAnimatorClip = animator[0].GetCurrentAnimatorClipInfo(0);
+                animationTime = myAnimatorClip[0].clip.length;
+                animationSpeed = animationTime / time;
+                for (int j = 0; j < numberControllers; j++)
+                {
+                    animator[j].SetFloat("AttackSpeed", animationSpeed);
+                }
+                return;
+            }
+        }
     }
 
     public void Walk(bool walk)
@@ -50,7 +66,6 @@ public class CharacterAnimations : MonoBehaviour
         for (int i = 0; i < numberControllers; i++)
         {
             animator[i].SetTrigger(AnimationsTags.ATTACK3);
-            ChangeAniamtionSpeed(time, animator[i]);
         }
     }
 
