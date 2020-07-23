@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class HealthEnemy : HealthScript
 {
@@ -29,6 +30,15 @@ public class HealthEnemy : HealthScript
             healthFill.fillAmount = health / healthMax;
             healthFill.color = gradient.Evaluate(health / healthMax);
         }
+
+        if (healthText != null)
+        {
+            healthText.gameObject.SetActive(true);
+            healthText.text = damage.ToString();
+
+            StopCoroutine("ResetShowDamage");
+            StartCoroutine("ResetShowDamage");
+        }
         if (health <= 0 && !isDead)
         {
             characterAnimations.Die();
@@ -39,7 +49,7 @@ public class HealthEnemy : HealthScript
             GetComponent<NavMeshAgent>().enabled = false;
             GetComponent<BoxCollider>().enabled = false;
             GetComponent<NavMeshObstacle>().enabled = false;
-            healthUI.SetActive(false);
+            healthFill.gameObject.SetActive(false);
             DieEvent?.Invoke(this, EventArgs.Empty);
             StartCoroutine(DisableEnemy());
         }
@@ -53,7 +63,14 @@ public class HealthEnemy : HealthScript
     IEnumerator DisableEnemy()
     {
         yield return new WaitForSeconds(waitTimeToDisable);
+        healthText.gameObject.SetActive(false);
         gameObject.SetActive(false);
+    }
+    IEnumerator ResetShowDamage()
+    {
+        yield return new WaitForSeconds(1.5f);
+        healthText.gameObject.SetActive(false);
+        yield return null;
     }
 
     public void reviveEnemy()
@@ -63,7 +80,8 @@ public class HealthEnemy : HealthScript
         GetComponent<NavMeshAgent>().enabled = true;
         GetComponent<BoxCollider>().enabled = true;
         GetComponent<NavMeshObstacle>().enabled = false;
-        healthUI.SetActive(true);
+     //   healthUI.SetActive(true);
+        healthFill.gameObject.SetActive(true);
         isDead = false;
 
         if (healthFill != null)
