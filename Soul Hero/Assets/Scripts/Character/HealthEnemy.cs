@@ -1,0 +1,86 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class HealthEnemy : HealthScript
+{
+    public event EventHandler DieEvent;
+    public int experience = 3;
+    private Experience playerExperience;
+    private float waitTimeToDisable = 3f;
+
+    private void Start()
+    {
+        if (healthFill != null)
+        {
+            healthFill.fillAmount = (health / healthMax);
+            healthFill.color = gradient.Evaluate(health / healthMax);
+        }
+        playerExperience = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG).GetComponent<Experience>();
+    }
+
+    public override void ApplyDamage(int damage)
+    {
+        health -= damage;
+        if (healthFill != null)
+        {
+            healthFill.fillAmount = health / healthMax;
+            healthFill.color = gradient.Evaluate(health / healthMax);
+        }
+        if (health <= 0 && !isDead)
+        {
+            characterAnimations.Die();
+            isDead = true;
+
+            GiveExp();
+            GetComponent<EnemyControler>().enabled = false;
+            GetComponent<NavMeshAgent>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+            GetComponent<NavMeshObstacle>().enabled = false;
+            healthUI.SetActive(false);
+            DieEvent?.Invoke(this, EventArgs.Empty);
+            StartCoroutine(DisableEnemy());
+        }
+    }
+
+    private void GiveExp()
+    {
+        playerExperience.GetExp(experience);
+    }
+
+    IEnumerator DisableEnemy()
+    {
+        yield return new WaitForSeconds(waitTimeToDisable);
+        gameObject.SetActive(false);
+    }
+
+    public void reviveEnemy()
+    {
+        health = (int)healthMax;
+        GetComponent<EnemyControler>().enabled = true;
+        GetComponent<NavMeshAgent>().enabled = true;
+        GetComponent<BoxCollider>().enabled = true;
+        GetComponent<NavMeshObstacle>().enabled = false;
+        healthUI.SetActive(true);
+        isDead = false;
+
+        if (healthFill != null)
+        {
+            healthFill.fillAmount = (health / healthMax);
+            healthFill.color = gradient.Evaluate(health / healthMax);
+        }
+    }
+
+    public override void AddMaxHealth(int value)
+    {
+        healthMax += value;
+        health += value;
+        if (healthFill != null)
+        {
+            healthFill.fillAmount = health / healthMax;
+            healthFill.color = gradient.Evaluate(health / healthMax);
+        }
+    }
+}

@@ -6,13 +6,13 @@ using System;
 public class ItemWorldSpawner : MonoBehaviour
 {
     public Item[] item;
-    private HealthScript healthScript;
+    private HealthEnemy healthScript;
     private float yPoxSpawn = 0.5f;
     public float chanceToDrop = 0.5f;
 
     private void Start()
     {
-        healthScript = GetComponent<HealthScript>();
+        healthScript = GetComponent<HealthEnemy>();
         healthScript.DieEvent += DieEvent;
     }
 

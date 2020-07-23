@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -252,18 +252,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 10
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
+    m_BestFit: 1
+    m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 10
 --- !u!1 &1833472333
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,12 +387,12 @@ GameObject:
   - component: {fileID: 1149401925191822063}
   - component: {fileID: 5104248840342828116}
   - component: {fileID: 5104248840342828119}
-  - component: {fileID: 7826756427951605980}
   - component: {fileID: 7826756427794886448}
   - component: {fileID: 7826756427794886449}
   - component: {fileID: 9189380287599946553}
   - component: {fileID: 1849617554}
   - component: {fileID: -9188451573194967199}
+  - component: {fileID: 2541963112959852673}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -451,54 +451,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showStats: 0
---- !u!114 &7826756427951605980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3468774164007304096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 874c7133bdfb7bf4d9422b8c7b6c3d64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDead: 0
-  healthUI: {fileID: 1458639813}
-  healthFill: {fileID: 1430431839}
-  healthText: {fileID: 1791269875}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 1, g: 0.9060749, b: 0, a: 1}
-    key2: {r: 0, g: 1, b: 0.13646793, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 19661
-    ctime1: 45875
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 1
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
-  healthRegen: 0
-  period: 1
-  experience: 3
 --- !u!65 &7826756427794886448
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -580,6 +532,54 @@ MonoBehaviour:
   cursorTexture: {fileID: 2800000, guid: 24d21e256b498a944a00e2527ed7618c, type: 3}
   cursorMode: 0
   hotSpot: {x: 58, y: 8}
+--- !u!114 &2541963112959852673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3468774164007304096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0107fabe638edba45a447f69c977edad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  healthUI: {fileID: 1458639813}
+  healthFill: {fileID: 1430431839}
+  healthText: {fileID: 1791269875}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 1, g: 0.9060749, b: 0, a: 1}
+    key2: {r: 0, g: 1, b: 0.13646793, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 19661
+    ctime1: 45875
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  healthRegen: 0
+  period: 1
+  experience: 3
 --- !u!1 &5049198870696336080
 GameObject:
   m_ObjectHideFlags: 0

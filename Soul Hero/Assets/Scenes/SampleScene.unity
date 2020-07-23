@@ -3952,7 +3952,7 @@ PrefabInstance:
     - target: {fileID: 5462402938975269510, guid: bb7b953326c2e814cbbcbf6229a8bb4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8367314030652285897, guid: bb7b953326c2e814cbbcbf6229a8bb4e,
         type: 3}
@@ -7129,7 +7129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1734249959
 Transform:
   m_ObjectHideFlags: 0
@@ -8266,7 +8266,7 @@ PrefabInstance:
     - target: {fileID: 5462402938975269510, guid: bb7b953326c2e814cbbcbf6229a8bb4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8367314030652285897, guid: bb7b953326c2e814cbbcbf6229a8bb4e,
         type: 3}
@@ -9477,7 +9477,7 @@ PrefabInstance:
     - target: {fileID: 5549074228285766434, guid: 0c83be9d1d7150f46ac18e658667f19e,
         type: 3}
       propertyPath: showStats
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5549074228285766462, guid: 0c83be9d1d7150f46ac18e658667f19e,
         type: 3}
@@ -9497,7 +9497,7 @@ PrefabInstance:
     - target: {fileID: 5549074228285766462, guid: 0c83be9d1d7150f46ac18e658667f19e,
         type: 3}
       propertyPath: wait_Beffore_Attack_Time
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5549074228285766462, guid: 0c83be9d1d7150f46ac18e658667f19e,
         type: 3}
@@ -24831,12 +24831,22 @@ PrefabInstance:
     - target: {fileID: 3468774164007304096, guid: 972436063ac065a4ab946aee547feb83,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5104248840342828119, guid: 972436063ac065a4ab946aee547feb83,
+        type: 3}
+      propertyPath: showStats
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7826756427794886449, guid: 972436063ac065a4ab946aee547feb83,
         type: 3}
       propertyPath: attack_damage
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7826756427794886449, guid: 972436063ac065a4ab946aee547feb83,
+        type: 3}
+      propertyPath: wait_Beffore_Attack_Time
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9189380287599946553, guid: 972436063ac065a4ab946aee547feb83,
         type: 3}

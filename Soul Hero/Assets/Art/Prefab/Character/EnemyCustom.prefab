@@ -41,12 +41,12 @@ GameObject:
   - component: {fileID: 8367314030652285897}
   - component: {fileID: 4411340120935628146}
   - component: {fileID: 4411340120935628145}
-  - component: {fileID: 1689954533126504954}
   - component: {fileID: 1689954532968539670}
   - component: {fileID: 1689954532968539671}
   - component: {fileID: 318323589608743455}
   - component: {fileID: 8930028042712016308}
   - component: {fileID: 5647959981813859220}
+  - component: {fileID: -9195342013161191146}
   m_Layer: 0
   m_Name: EnemyCustom
   m_TagString: Enemy
@@ -104,54 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864ec0f2ef8ed0742be4d3a49f3b3785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1689954533126504954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5462402938975269510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 874c7133bdfb7bf4d9422b8c7b6c3d64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDead: 0
-  healthUI: {fileID: 8930028043396684515}
-  healthFill: {fileID: 8930028043437351289}
-  healthText: {fileID: 8930028042791293653}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 0, b: 0, a: 1}
-    key1: {r: 1, g: 0.9060749, b: 0, a: 1}
-    key2: {r: 0, g: 1, b: 0.13646793, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 19661
-    ctime1: 45875
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 1
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 2
-  healthRegen: 0
-  period: 1
-  experience: 5
+  showStats: 0
 --- !u!65 &1689954532968539670
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -180,6 +133,7 @@ MonoBehaviour:
   roationDegreesPerSecond: 180
   attack_Distance: 1.5
   attack_Distance_OffSet: 0
+  wait_Beffore_Attack_Time: 1.4
   attack_damage: 0
   bonus_attack_damage: 0
   canMove: 0
@@ -232,6 +186,54 @@ MonoBehaviour:
   cursorTexture: {fileID: 0}
   cursorMode: 0
   hotSpot: {x: 58, y: 8}
+--- !u!114 &-9195342013161191146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5462402938975269510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0107fabe638edba45a447f69c977edad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  healthUI: {fileID: 8930028043396684515}
+  healthFill: {fileID: 8930028043437351289}
+  healthText: {fileID: 8930028042791293653}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 1, g: 0.9060749, b: 0, a: 1}
+    key2: {r: 0, g: 1, b: 0.13646793, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 19661
+    ctime1: 45875
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  healthRegen: 0
+  period: 1
+  experience: 3
 --- !u!1 &8930028042765867115
 GameObject:
   m_ObjectHideFlags: 0

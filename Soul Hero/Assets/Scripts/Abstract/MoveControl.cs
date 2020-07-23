@@ -62,7 +62,7 @@ abstract public class MoveControl : MonoBehaviour
         characterAnimations.Walk(false);
 
         attack_Timer += Time.deltaTime;
-        if (attack_Timer > wait_Beffore_Attack_Time) // TODO change to animation time, animation event
+        if (attack_Timer > wait_Beffore_Attack_Time)
         {
             attack_Timer = 0f;
             if (Vector3.Distance(transform.position, target.transform.position) >=
