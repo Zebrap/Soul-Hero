@@ -35,6 +35,7 @@ public class HealthPlayer : HealthScript
             characterAnimations.Die();
             isDead = true;
             GetComponent<PlayerMovement>().enabled = false;
+            GetComponent<AbilityControler>().enabled = false;
             GameObject.FindGameObjectWithTag(Tags.ENEMY_TAG).GetComponent<EnemyControler>().enabled = false;
 
         }

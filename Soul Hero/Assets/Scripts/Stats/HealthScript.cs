@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public abstract class HealthScript : MonoBehaviour
 {
-    public float healthMax { get; set; } = 100f;
-    public int health { get; set; }
+    public float healthMax = 100f;
+    public int health;
     public bool isDead = false;
     protected CharacterAnimations characterAnimations;
 #pragma warning disable 0649
