@@ -23,6 +23,7 @@ public class Tags
     public const string ENEMY_TAG = "Enemy";
     public const string MAINCAMERA_TAG = "MainCamera";
     public const string MODEL_TAG = "Model";
+    public const string CANVAS_TAG = "MainCanvas";
 }
 
 public class UiTags

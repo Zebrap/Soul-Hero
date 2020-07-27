@@ -11,6 +11,7 @@ public class HealthEnemy : HealthScript
     public int experience = 3;
     private Experience playerExperience;
     private float waitTimeToDisable = 3f;
+//    public Text textDamagePrfab;
 
     private void Start()
     {
@@ -33,12 +34,10 @@ public class HealthEnemy : HealthScript
 
         if (healthText != null)
         {
-            healthText.gameObject.SetActive(true);
-            healthText.text = damage.ToString();
-
-            StopCoroutine("ResetShowDamage");
-            StartCoroutine("ResetShowDamage");
+             ShowDealDamage(damage);
         }
+    //    Text text = Instantiate(textDamagePrfab, transform);
+    //    text.text = damage.ToString();
         if (health <= 0 && !isDead)
         {
             characterAnimations.Die();
@@ -66,6 +65,15 @@ public class HealthEnemy : HealthScript
         healthText.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }
+    private void ShowDealDamage(float damage)
+    {
+        healthText.gameObject.SetActive(true);
+        healthText.text = damage.ToString();
+
+        StopCoroutine("ResetShowDamage");
+        StartCoroutine("ResetShowDamage");
+    }
+
     IEnumerator ResetShowDamage()
     {
         yield return new WaitForSeconds(1.5f);

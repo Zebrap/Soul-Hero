@@ -10,9 +10,9 @@ public class ChangeCursor : MonoBehaviour
     public CursorMode cursorMode = CursorMode.Auto;
     public Vector2 hotSpot = Vector2.zero;
 
-    private void Awake()
+    private void Start()
     {
-        GameObject UI = GameObject.Find("Canvas");
+        GameObject UI = GameObject.Find(Tags.CANVAS_TAG);
         GUI_Script = UI.GetComponent<GUI_Script>();
     }
 

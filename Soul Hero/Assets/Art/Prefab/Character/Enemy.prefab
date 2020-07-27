@@ -504,6 +504,8 @@ MonoBehaviour:
   healthRegen: 0
   period: 1
   experience: 3
+  textDamagePrfab: {fileID: 3845656437669916927, guid: 7b0649d2f45c6da40bdd8245d144dc35,
+    type: 3}
 --- !u!1 &5049198870696336080
 GameObject:
   m_ObjectHideFlags: 0
