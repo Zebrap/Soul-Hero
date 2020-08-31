@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -9,4 +10,8 @@ public class UI : MonoBehaviour
         GetComponent<Canvas>().enabled = true;
     }
 
+    public void ResetLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

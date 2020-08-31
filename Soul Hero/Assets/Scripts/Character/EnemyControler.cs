@@ -13,6 +13,7 @@ public class EnemyControler : MoveControl
 {
     private EnamyState enamy_State;
     private NavMeshObstacle obstacle;
+    private Vector3 startPosition;
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class EnemyControler : MoveControl
 
         target = GameObject.FindGameObjectWithTag(Tags.PLAYER_TAG);
         obstacle = GetComponent<NavMeshObstacle>();
+        startPosition = transform.position;
     }
 
     void Start()
@@ -92,4 +94,8 @@ public class EnemyControler : MoveControl
         navAgent.enabled = false;
     }
 
+    public void ResetPosition()
+    {
+        transform.position = startPosition;
+    }
 }

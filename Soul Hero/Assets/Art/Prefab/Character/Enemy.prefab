@@ -330,7 +330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3468774164007304096}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 5.94}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3326821369819760670}
@@ -504,8 +504,6 @@ MonoBehaviour:
   healthRegen: 0
   period: 1
   experience: 3
-  textDamagePrfab: {fileID: 3845656437669916927, guid: 7b0649d2f45c6da40bdd8245d144dc35,
-    type: 3}
 --- !u!1 &5049198870696336080
 GameObject:
   m_ObjectHideFlags: 0

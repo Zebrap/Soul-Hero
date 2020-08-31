@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class HealthPlayer : HealthScript
 {
+#pragma warning disable 0649
+    [SerializeField]
+    private GameObject panelGameOver;
 
     private void Start()
     {
@@ -32,12 +33,7 @@ public class HealthPlayer : HealthScript
         }
         if (health <= 0 && !isDead)
         {
-            characterAnimations.Die();
-            isDead = true;
-            GetComponent<PlayerMovement>().enabled = false;
-            GetComponent<AbilityControler>().enabled = false;
-            GameObject.FindGameObjectWithTag(Tags.ENEMY_TAG).GetComponent<EnemyControler>().enabled = false;
-
+            Dead();
         }
     }
 
@@ -54,6 +50,16 @@ public class HealthPlayer : HealthScript
             healthFill.fillAmount = health / healthMax;
             healthFill.color = gradient.Evaluate(health / healthMax);
         }
+    }
+
+    private void Dead()
+    {
+        panelGameOver.SetActive(true);
+        characterAnimations.Die();
+        isDead = true;
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<AbilityControler>().enabled = false;
+        GameObject.FindGameObjectWithTag(Tags.ENEMY_TAG).GetComponent<EnemyControler>().enabled = false;
     }
 
 }
