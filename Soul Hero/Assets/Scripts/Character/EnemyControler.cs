@@ -55,8 +55,10 @@ public class EnemyControler : MoveControl
         navAgent.avoidancePriority = (int)Vector3.Distance(transform.position, target.transform.position);
         
         navAgent.SetDestination(target.transform.position);
+        /* // Debug path 
         for (int i = 0; i < navAgent.path.corners.Length - 1; i++)
             Debug.DrawLine(navAgent.path.corners[i], navAgent.path.corners[i + 1], Color.red);
+        */
         if (navAgent.velocity.sqrMagnitude == 0)
         {
             characterAnimations.Walk(false);

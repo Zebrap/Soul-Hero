@@ -10,7 +10,7 @@ public class HealthEnemy : HealthScript
     public event EventHandler DieEvent;
     public int experience = 3;
     private Experience playerExperience;
-    private float waitTimeToDisable = 3f;
+    private float waitTimeToDisable = 5f;
 //    public Text textDamagePrfab;
 
     private void Start()
