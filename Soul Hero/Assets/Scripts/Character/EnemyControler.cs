@@ -14,6 +14,7 @@ public class EnemyControler : MoveControl
     private EnamyState enamy_State;
     private NavMeshObstacle obstacle;
     private Vector3 startPosition;
+    public float chaseDistance = 20f;
 
     void Awake()
     {
@@ -54,6 +55,10 @@ public class EnemyControler : MoveControl
 
     void ChasePlayer()
     {
+        if(Vector3.Distance(transform.position, target.transform.position) > chaseDistance)
+        {
+            return;
+        }
         navAgent.avoidancePriority = (int)Vector3.Distance(transform.position, target.transform.position);
         
         navAgent.SetDestination(target.transform.position);

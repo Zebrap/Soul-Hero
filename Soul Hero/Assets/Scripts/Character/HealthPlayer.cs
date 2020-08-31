@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+
 public class HealthPlayer : HealthScript
 {
 #pragma warning disable 0649
@@ -62,4 +63,8 @@ public class HealthPlayer : HealthScript
         GameObject.FindGameObjectWithTag(Tags.ENEMY_TAG).GetComponent<EnemyControler>().enabled = false;
     }
 
+    public override void HealthText(int health, int healthMax)
+    {
+        healthText.text = health + " / " + healthMax;
+    }
 }

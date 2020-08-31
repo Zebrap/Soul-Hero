@@ -109,4 +109,9 @@ public class HealthEnemy : HealthScript
             healthFill.color = gradient.Evaluate(health / healthMax);
         }
     }
+
+    public override void HealthText(int health, int healthMax)
+    {
+        return;
+    }
 }

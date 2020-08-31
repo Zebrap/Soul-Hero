@@ -55,11 +55,9 @@ public abstract class HealthScript : MonoBehaviour
             health = Mathf.Clamp(health + regeneration, 0, (int)healthMax);
             healthFill.fillAmount = health / healthMax;
             healthFill.color = gradient.Evaluate(health / healthMax);
-            if (healthText != null)
-            {
-                healthText.text = health + " / " + healthMax;
-            }
+            HealthText(health, (int)healthMax);
         }
     }
     public abstract void AddMaxHealth(int value);
+    public abstract void HealthText(int health, int healthMax);
 }
