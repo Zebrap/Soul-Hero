@@ -13,7 +13,7 @@ public class SpawnEnemy : MonoBehaviour
             {
                 if (!child.gameObject.activeSelf)
                 {
-                    child.GetComponent<HealthEnemy>().reviveEnemy();
+                    child.GetComponent<HealthEnemy>().ReviveEnemy();
                     child.gameObject.SetActive(true);
                     child.GetComponent<EnemyControler>().ResetPosition();
                 }

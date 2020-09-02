@@ -69,6 +69,14 @@ public class CharacterAnimations : MonoBehaviour
         }
     }
 
+    public void SetTrigger(string tag)
+    {
+        for (int i = 0; i < numberControllers; i++)
+        {
+            animator[i].SetTrigger(tag);
+        }
+    }
+
     public void Die()
     {
         for (int i = 0; i < numberControllers; i++)

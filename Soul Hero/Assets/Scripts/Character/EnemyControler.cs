@@ -11,7 +11,7 @@ public enum EnamyState
 
 public class EnemyControler : MoveControl
 {
-    private EnamyState enamy_State;
+    protected EnamyState enamy_State;
     private NavMeshObstacle obstacle;
     private Vector3 startPosition;
     public float chaseDistance = 20f;
@@ -53,7 +53,7 @@ public class EnemyControler : MoveControl
         }
     }
 
-    void ChasePlayer()
+    protected void ChasePlayer()
     {
         if(Vector3.Distance(transform.position, target.transform.position) > chaseDistance)
         {

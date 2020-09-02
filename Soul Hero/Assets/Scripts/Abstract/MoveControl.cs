@@ -120,4 +120,9 @@ abstract public class MoveControl : MonoBehaviour
         wait_Beffore_Attack_Time = value;
         characterAnimations.SetAttackSpeed(wait_Beffore_Attack_Time);
     }
+
+    public Vector3 GetTargetPos()
+    {
+        return target.transform.position;
+    }
 }

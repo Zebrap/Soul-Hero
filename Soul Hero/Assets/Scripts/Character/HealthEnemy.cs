@@ -81,7 +81,7 @@ public class HealthEnemy : HealthScript
         yield return null;
     }
 
-    public void reviveEnemy()
+    public void ReviveEnemy()
     {
         health = (int)healthMax;
         GetComponent<EnemyControler>().enabled = true;

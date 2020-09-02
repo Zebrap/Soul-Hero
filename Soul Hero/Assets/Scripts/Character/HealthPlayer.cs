@@ -22,15 +22,18 @@ public class HealthPlayer : HealthScript
 
     public override void ApplyDamage(int damage)
     {
-        health -= damage;
-        if (healthText != null)
+        if (health > 0)
         {
-            healthText.text = health + " / " + healthMax;
-        }
-        if (healthFill != null)
-        {
-            healthFill.fillAmount = health / healthMax;
-            healthFill.color = gradient.Evaluate(health / healthMax);
+            health -= damage;
+            if (healthText != null)
+            {
+                healthText.text = health + " / " + healthMax;
+            }
+            if (healthFill != null)
+            {
+                healthFill.fillAmount = health / healthMax;
+                healthFill.color = gradient.Evaluate(health / healthMax);
+            }
         }
         if (health <= 0 && !isDead)
         {

@@ -135,9 +135,10 @@ MonoBehaviour:
   attack_Distance: 1.5
   attack_Distance_OffSet: 0.2
   wait_Beffore_Attack_Time: 2
-  attack_damage: 2
+  attack_damage: 4
   bonus_attack_damage: 0
   canMove: 0
+  chaseDistance: 20
 --- !u!208 &2210118398530729981
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -167,9 +168,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-  - itemType: 2
-    amount: 2
-  chanceToDrop: 1
+  - itemType: 3
+    amount: 1
+  - itemType: 1
+    amount: 0
+  chanceToDrop: 0.2
 --- !u!114 &6098039693546886774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0107fabe638edba45a447f69c977edad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthMax: 60
+  healthMax: 80
   health: 0
   isDead: 0
   healthUI: {fileID: 7002207186404544257}
