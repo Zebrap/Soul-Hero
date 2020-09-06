@@ -89,39 +89,6 @@ public class InventoryUI : MonoBehaviour
                 inventory.AddItem(draggedItem, tmpInventorySlot);
             });
         }
-        /*
-        foreach(Item item in inventory.GetItemList())
-        {
-            RectTransform itemSlotReactTransform = Instantiate(itemSlot, ItemSlotContainer).GetComponent<RectTransform>();
-            itemSlotReactTransform.gameObject.SetActive(true);
-            itemSlotReactTransform.GetComponent<DragDrop>().SetItem(item);
-
-            Image image = itemSlotReactTransform.Find("BackGround").GetComponent<Image>();
-            image.sprite = item.GetSprite();
-            Text textAmount = itemSlotReactTransform.Find("Text").GetComponent<Text>();
-            if(item.amount > 1)
-            {
-                textAmount.text = item.amount.ToString();
-            }
-            else
-            {
-                textAmount.text = "";
-            }
-        }*/
-
-        /*
-        itemSlotReactTransform.GetComponent<ClickManager>().leftClick.AddListener(() =>
-        {
-            print("Left click");
-        });
-        itemSlotReactTransform.GetComponent<ClickManager>().rightClick.AddListener(() =>
-        {
-            print("right click");
-        });
-        itemSlotReactTransform.GetComponent<ClickManager>().middleClick.AddListener(() =>
-        {
-            print("middle click");
-        });*/
     }
 
     void OnDisable()

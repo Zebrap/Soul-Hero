@@ -8,6 +8,7 @@ public class GUI_Script : MonoBehaviour
 {
     public GameObject SkillTree;
     public GameObject inventoryUI;
+    public GameObject escapeUI;
 
     GraphicRaycaster m_Raycaster;
     PointerEventData m_PointerEventData;
@@ -35,6 +36,18 @@ public class GUI_Script : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             OnoOffGameObject(inventoryUI);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            escapeUI.SetActive(!escapeUI.activeSelf);
+            if (escapeUI.activeSelf)
+            {
+                PauseGame();
+            }
+            else
+            {
+                ResumeGame();
+            }
         }
     }
 
@@ -83,5 +96,20 @@ public class GUI_Script : MonoBehaviour
     public bool IsMauseOverUi()
     {
         return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

@@ -22,11 +22,8 @@ public class Inventory
         }
         AddItem(new Item(Item.ItemType.HealthPotion,10));
         AddItem(new Item(Item.ItemType.ManaPotion,10));
-        AddItem(new Item(Item.ItemType.BaseSword));
-        for (int i=0; i<2; i++)
-        {
-            AddItem(new Item(Item.ItemType.DarkSword));
-        }
+     //   AddItem(new Item(Item.ItemType.BaseSword));
+     //   AddItem(new Item(Item.ItemType.DarkSword));
     }
 
     public bool AddItem(Item item)

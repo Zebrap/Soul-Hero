@@ -7,7 +7,7 @@ public class MainCamera : MonoBehaviour
     public GameObject player;
     Vector3 offset;
     float minFov = 15f;
-    float maxFov = 90f;
+    float maxFov = 70f;
     float sensitivity = 10f;
     private bool rotateCamera = false;
     public float cameraSpeed = 3f;
