@@ -9,6 +9,7 @@ public class GUI_Script : MonoBehaviour
     public GameObject SkillTree;
     public GameObject inventoryUI;
     public GameObject escapeUI;
+    public GameObject winPanel;
 
     GraphicRaycaster m_Raycaster;
     PointerEventData m_PointerEventData;
@@ -62,7 +63,6 @@ public class GUI_Script : MonoBehaviour
             window.SetActive(true);
         }
     }
-
     public bool ClickGUI()
     {
         //Set up the new Pointer Event
@@ -77,10 +77,10 @@ public class GUI_Script : MonoBehaviour
         m_Raycaster.Raycast(m_PointerEventData, results);
 
         //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
-      /*foreach (RaycastResult result in results)
-        {
-            Debug.Log("Hit " + result.gameObject.name);
-        }*/
+        /*foreach (RaycastResult result in results)
+          {
+              Debug.Log("Hit " + result.gameObject.name);
+          }*/
 
         if (results.Count > 0)
         {
@@ -93,6 +93,18 @@ public class GUI_Script : MonoBehaviour
     }
 
 
+
+    public void Win()
+    {
+        PauseGame();
+        OnoOffGameObject(winPanel);
+    }
+
+    public void CloseWinPanel()
+    {
+        ResumeGame();
+        OnoOffGameObject(winPanel);
+    }
     public bool IsMauseOverUi()
     {
         return EventSystem.current.IsPointerOverGameObject();
